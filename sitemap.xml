@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>http://anoduck.github.io/</loc>
+    <lastmod>2016-12-10T11:11:36-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://anoduck.github.io/posts/ruby_env/</loc>
+    <lastmod>2016-12-10T11:11:36-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://anoduck.github.io/posts/aptitude/</loc>
+    <lastmod>2016-12-09T03:30:11-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://anoduck.github.io/posts/helloworld/</loc>
+    <lastmod>2016-12-07T15:17:48-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://anoduck.github.io/posts/dotemacsdotorg/</loc>
+    <lastmod>2016-12-10T11:54:46-05:00</lastmod>
+  </url>
+  
+</urlset>

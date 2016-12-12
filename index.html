@@ -1,0 +1,1709 @@
+<!doctype html>
+<html>
+<head>
+	<meta name="generator" content="Hugo 0.17" />
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>anoduck.github.io</title>
+    <link href='/slate/stylesheets/monokai.css' rel="stylesheet" media="screen" />
+<link href='/slate/stylesheets/screen.css' rel="stylesheet" media="screen" />
+<link href='/slate/stylesheets/print.css' rel="stylesheet" media="print" />
+
+    
+<script src='/slate/javascripts/all.js'></script>
+
+    
+</head>
+<body class="index" data-languages="[ &#34;shell&#34; ,  &#34;emacs-lisp&#34; ,  &#34;python&#34; ,  &#34;javascript&#34; ,  &#34;go&#34; ,  &#34;ruby&#34; ]">
+    <a href="#" id="nav-button">
+        <span>
+        NAV
+        <img src='/slate/images/navbar.png'/>
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+        <img src='/images/logo.png' />
+        
+        <div class="lang-selector">
+            
+            <a href="#" data-language-name="shell">Shell</a>
+            
+            <a href="#" data-language-name="emacs-lisp">Emacs-Lisp</a>
+            
+            <a href="#" data-language-name="python">Python</a>
+            
+            <a href="#" data-language-name="javascript">Javascript</a>
+            
+            <a href="#" data-language-name="go">Go</a>
+            
+            <a href="#" data-language-name="ruby">Ruby</a>
+            
+        </div>
+         
+        
+        <div class="search">
+            <input type="text" class="search" id="input-search" placeholder='Search'>
+        </div>
+        <ul class="search-results"></ul>
+        
+        <div id="toc">
+        </div>
+         
+        
+        <ul class="toc-footer">
+            
+            <li>Thanks for visiting my site!</li>
+            
+            <li>Documentation Powered by <a href="https://github.com/bep/docuapi" target="_blank">DocuAPI</a></li>
+            
+            <li>All rights reserved.</li>
+            
+        </ul>
+        
+    </div>
+    <div class="page-wrapper">
+        <div class="dark-box"></div>
+        <div class="content">
+            
+    
+        
+    
+        
+
+<h1 id="aptitude">Aptitude</h1>
+<div class="highlight"><pre><code class="language-shell" data-lang="shell">dpkg -l <span class="p">|</span> awk <span class="s1">&#39;/^rc/{ print $2}&#39;</span> <span class="p">|</span> sudo xargs dpkg --purge
+</code></pre></div>
+
+<p>
+In Ubuntu, aptitude will do almost anything, but almost is the key to this phrase.
+</p>
+<div class="highlight"><pre><code class="language-shell" data-lang="shell">Sudo apt-get remove
+</code></pre></div>
+
+<p>Will only remove the executable files and libraries, it will leave configuration files.</p>
+<div class="highlight"><pre><code class="language-shell" data-lang="shell">Sudo apt-get purge
+</code></pre></div>
+
+<p>Will remove most configuration files and all executable and libraries</p>
+
+<p>####When this fales</p>
+
+<p>You try:</p>
+<div class="highlight"><pre><code class="language-shell" data-lang="shell">dpkg -l <span class="p">|</span> awk <span class="s1">&#39;/^rc/{ print $2}&#39;</span> <span class="p">|</span> sudo xargs dpkg --purge
+</code></pre></div>
+
+<p>OR:</p>
+<div class="highlight"><pre><code class="language-shell" data-lang="shell">dpkg -l <span class="p">|</span> awk <span class="s1">&#39;/^rc/{ print $2}&#39;</span> <span class="p">|</span> sudo xargs dpkg --purge
+</code></pre></div>
+
+<p>Something like</p>
+<div class="highlight"><pre><code class="language-shell" data-lang="shell">sudo dpkg --purge <span class="sb">`</span>dpkg --get-selections <span class="p">|</span> grep deinstall <span class="p">|</span> cut -f1<span class="sb">`</span>
+</code></pre></div>
+
+<p>Query all packages install until today</p>
+<div class="highlight"><pre><code class="language-shell" data-lang="shell">awk -v <span class="nv">foo</span><span class="o">=</span><span class="k">$(</span>date <span class="s1">&#39;+%Y-%m-%d&#39;</span><span class="k">)</span> -v <span class="nv">bar</span><span class="o">=</span><span class="k">$(</span>date -d <span class="s2">&quot;yesterday&quot;</span> <span class="s1">&#39;+%Y-%m-%d&#39;</span><span class="k">)</span> <span class="s1">&#39;($1==foo || $1==bar) &amp;&amp; $3~/^install$/ { print $4 }&#39;</span> /var/log/dpkg.log
+</code></pre></div>
+
+<p>(aptitude help)[<a href="https://help.ubuntu.com/community/AptGet/Howto" target="_blank">https://help.ubuntu.com/community/AptGet/Howto</a>]</p>
+
+    
+        
+
+<h1 id="hello-world-and-welcome-to-my-github-site">Hello World and Welcome to my Github site</h1>
+<div class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="nv">$ </span><span class="nb">cd</span> <span class="nv">$PATH</span>/OF/DESIRED/BLOG/LOCATION
+<span class="nv">$ </span>hugo new site <span class="nv">$PATH</span>
+<span class="nv">$ </span>git clone <span class="nv">$THEME</span>-GIT-URI
+<span class="nv">$ </span>hugo new posts/helloworld.md
+</code></pre></div>
+
+<p>It became a big question, What was I going to do with my github page? I thought about it, even went so far as installing another site, then it hit me. The specifications that were desired were that the site is easy to maintain and update, lightweight, and I wanted the means to correctly communicate with the target audience intended. I had tried serveral different options I knew for generating really simple one page websites, then I remembered the docuapi template that is available for use with hugo site engine. It fit together like peas and carrots. Now we have a brilliant place to discuss code, and it provides room for any additional announcements that I would like to make. I even love the additionaly twin panel design for code and for not code. Click on the shell tab over on your right, and see the code that I used to generate a page. Have fun!</p>
+
+    
+        
+
+<h1 id="emacs-init-org">Emacs init.org</h1>
+
+<h3 id="my-personal-init-file-for-emacs">my personal init file for emacs.</h3>
+
+<p>Altered from original content to suite present format. Please have
+patience, the markup on this posting is corrupted. And Minot
+corrections are currently being performed.</p>
+
+<h2 id="dotemacs-begins-here">Dotemacs Begins Here</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="c1">;;|&gt;&gt;&gt;:Begin:&lt;&lt;&lt;|</span>
+</code></pre></div>
+
+<ul>
+<li>Sho-nough need to do some editing here</li>
+<li>This is where beginning commentary(edited out) ends, and where
+loading of actual lisp content begins.</li>
+<li>Remember to post comments after code to make format work.</li>
+</ul>
+
+<h3 id="initialization-of-packages">initialization of packages</h3>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="c1">;;&#39;(package-initialize)</span>
+</code></pre></div>
+
+<ul>
+<li>Initialize the Emacs package manager</li>
+<li>TODO: Need to clean up markup of this posting.</li>
+</ul>
+
+<h2 id="1-load-init-loader">1 Load Init Loader</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp">    <span class="c1">;;(add-to-list &#39;load-path &quot;~/.emacs.d/elpa/init-loader-20141030.2333/&quot;)</span>
+    <span class="c1">;;(autoload &#39;init-loader &quot;~/.emacs.d/elpa/init-loader-20141030.2333&quot; &quot;load init-loader&quot;)</span>
+    <span class="c1">;;(load &quot;~/.emacs.d/elpa/init-loader-20141030.2333/init-loader.el&quot;)</span>
+    <span class="c1">;;(require &#39;init-loader)</span>
+    <span class="c1">;;    (init-loader-load &quot;~/.emacs.d/lisp&quot;)</span>
+</code></pre></div>
+
+<ul>
+<li>Moved to init.el</li>
+<li>Make life simpler</li>
+</ul>
+
+<h2 id="2-use-package">2 Use Package</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="c1">;;(add-to-list &#39;load-path &quot;~/.emacs.d/elpa/use-package-20160403.1129&quot;)</span>
+<span class="c1">;;(eval-when-compile</span>
+<span class="c1">;;  (require &#39;use-package))</span>
+<span class="c1">;;(require &#39;diminish)                ;; if you use :diminish</span>
+<span class="c1">;;(require &#39;bind-key)                ;; if you use any :bind variant</span>
+</code></pre></div>
+
+<ul>
+<li>Moved to init.el: Mon 09 May 2016 01:27:05 AM EDT</li>
+</ul>
+
+<h2 id="3-custom-theme">3 Custom Theme</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;load-path</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/spacemacs-theme&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">autoload</span> <span class="ss">&#39;spacemacs-theme</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/spacemacs-theme&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nb">use-package</span> <span class="nv">spacemacs-theme</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">load</span> <span class="s">&quot;~/.emacs.d/elpa/spacemacs-theme-20161205.1104/spacemacs-dark-theme.el&quot;</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">load</span> <span class="s">&quot;~/.emacs.d/elpa/spacemacs-theme-20161025.1104/spacemacs-common.el&quot;</span><span class="p">)</span>
+<span class="c1">;;(load &quot;~/.emacs.d/elpa/avk-emacs-themes-20160909.1323/avk-darkblue-white-theme.el&quot;)</span>
+<span class="c1">;;; Moved in case new way does not work</span>
+<span class="p">(</span><span class="nb">require</span> <span class="nv">spacemacs-theme</span><span class="p">)</span>
+</code></pre></div>
+
+<ul>
+<li>Alright I have to admit this is a little sloppy, But sometimes you
+have to get dirty to get cooking. Or something like that&hellip;</li>
+</ul>
+
+<h2 id="4-loading-misc-libraries">4 Loading misc libraries</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;load-path</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/project-persist&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;load-path</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/ppd-sr-speedbar&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;load-path</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/sr-speedbar&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;load-path</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/project-persist-drawer&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;load-path</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/calfw&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nb">load</span> <span class="s">&quot;~/.emacs.d/elpa/calfw-20160302.1858/calfw-org.el&quot;</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">load</span> <span class="s">&quot;~/.emacs.d/elpa/calfw-20160302.1858/calfw-cal.el&quot;</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">load</span> <span class="s">&quot;~/.emacs.d/packages/timeclock-x.el&quot;</span><span class="p">)</span>
+<span class="c1">;;(require &#39;tinypath) ;; ---&gt;&gt; Caused emacs to fail</span>
+</code></pre></div>
+
+<ul>
+<li>CALFW = Calendar Framework</li>
+<li>A lovely program that provides a calendar framework to various
+programs inside of emacs including org mode.</li>
+</ul>
+
+<h2 id="6-menu-bar">6 menu-bar</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;load-path</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/menu-bar+&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">autoload</span> <span class="ss">&#39;menu-bar+</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/menu-bar+&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nb">use-package</span> <span class="nv">menu-bar+</span><span class="p">)</span>
+<span class="c1">;; (load &quot;~/.emacs.d/elpa/menu-bar+-20160512.1714/menu-bar+.el&quot;)</span>
+</code></pre></div>
+
+<ul>
+<li>Loading of the venerable menu-bar+, which has been a great help
+remembering commands to run on emacs.</li>
+<li>Many professional emacs gurus recommend that beginners remove both
+the toolbar and the menubar from their setup. I don&rsquo;t necessarily
+agree to this. I can understand removal of the quite limited and
+juvenile toolbar, but there are so many different comands in emacs,
+and sometimes you don&rsquo;t know where to start searching for one.
+(yes,  there is apropos, of coarse.)</li>
+<li>Actually I take that back. While writing the above. I realized I had
+not touched the menubar in weeks. Although I am not quite a beginner
+anymore, it is quite easy doing without the menus and buttons.</li>
+</ul>
+
+<h2 id="7-to-include-reminders-in-shell-for-some-reason">7 To include reminders in shell, for some reason</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="c1">;; ;; To include .reminders as a shell mode </span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">auto-mode-alist</span>
+        <span class="p">(</span><span class="nb">cons</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;.reminders$&quot;</span> <span class="o">.</span> <span class="nv">shell-script-mode</span><span class="p">)</span> <span class="nv">auto-mode-alist</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;sh-mode-hook</span>
+     <span class="p">(</span><span class="k">lambda</span> <span class="p">()</span>
+       <span class="p">(</span><span class="nv">auto-fill-mode</span> <span class="no">nil</span><span class="p">)))</span>
+</code></pre></div>
+
+<ul>
+<li><p>I have not idea where this snippet came from.</p></li>
+
+<li><p>It appears that this snippet also has not given me any trouble so
+far. So thus it will stay enable until more can be determined.</p></li>
+</ul>
+
+<h2 id="9-load-path-additions">9 Load path additions</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;load-path</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/smartparens&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;load-path</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/dash&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;load-path</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/company&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">autoload</span> <span class="ss">&#39;company</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/company&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nb">use-package</span> <span class="nv">company</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;load-path</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/smartparens&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">autoload</span> <span class="ss">&#39;smartparens</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/smartparens&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nb">use-package</span> <span class="nv">smartparens</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;load-path</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/smart-comment&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">autoload</span> <span class="ss">&#39;smart-comment</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/smart-comment&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nb">use-package</span> <span class="nv">smart-comment</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;load-path</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/company&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;load-path</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/web-mode&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;load-path</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/ido-ubiquitous&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">autoload</span> <span class="ss">&#39;ido-ubiquitous</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/ido-ubiquitous&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nb">use-package</span> <span class="nv">ido-ubiquitous</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;load-path</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/rich-minority&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;load-path</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/dash&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">autoload</span> <span class="ss">&#39;dash</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/dash&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nb">use-package</span> <span class="nv">dash</span><span class="p">)</span>
+</code></pre></div>
+
+<ul>
+<li>Many additions to PATH that did not either load from init-loader
+for some reason, or is acting quirky.
+
+<ul>
+<li>Smartparens - A program to help close paranthesis and know
+when they are needed.</li>
+<li>Dash - Required by another package</li>
+<li>Company - which is one of the many autocompletion programs
+available for emacs. From what I can tell, can operate fine with
+other autocompletion programs present.</li>
+<li>smart comment - allow intelligent insertion of comment markers</li>
+<li>ido-ubiquitous - ubiquitous completion of stuff with ido(ido
+is another autocompletion framework)</li>
+<li>web-mode - helps with editing web content. Sweet package.</li>
+<li>rich minority - which does something really swell, I am sure.
+<br /></li>
+</ul></li>
+</ul>
+
+<h2 id="10-org-customization">10 Org-Customization</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="c1">;;(setq default-major-mode &#39;org-mode)</span>
+<span class="c1">;;(add-to-list &#39;auto-mode-alist &#39;(&quot;README$&quot; . org-mode))</span>
+</code></pre></div>
+
+<ul>
+<li>set org to default mode</li>
+</ul>
+
+<h2 id="11-configuring-org-html-to-org-jekyll">11 Configuring Org-html to ORG-jekyll</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="k">setq</span> <span class="nv">org-publish-project-alist</span>
+      <span class="o">&#39;</span><span class="p">(</span>
+
+  <span class="p">(</span><span class="s">&quot;org-myjek&quot;</span>
+          <span class="c1">;; Path to your org files.</span>
+          <span class="ss">:base-directory</span> <span class="s">&quot;~/Sandbox/myjek/org/&quot;</span>
+          <span class="ss">:base-extension</span> <span class="s">&quot;org&quot;</span>
+
+          <span class="c1">;; Path to your Jekyll project.</span>
+          <span class="ss">:publishing-directory</span> <span class="s">&quot;~/Sandbox/myjek/jekyll/&quot;</span>
+          <span class="ss">:recursive</span> <span class="no">t</span>
+          <span class="ss">:publishing-function</span> <span class="nv">org-publish-org-to-html</span>
+          <span class="ss">:headline-levels</span> <span class="mi">4</span> 
+          <span class="ss">:html-extension</span> <span class="s">&quot;html&quot;</span>
+          <span class="ss">:body-only</span> <span class="no">t</span> <span class="c1">;; Only export section between &lt;body&gt; &lt;/body&gt;</span>
+    <span class="p">)</span>
+
+    <span class="p">(</span><span class="s">&quot;org-static-ian&quot;</span>
+          <span class="ss">:base-directory</span> <span class="s">&quot;~/Sandbox/myjek/org/&quot;</span>
+          <span class="ss">:base-extension</span> <span class="s">&quot;css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf\\|php&quot;</span>
+          <span class="ss">:publishing-directory</span> <span class="s">&quot;~/Sandbox/myjek/html/&quot;</span>
+          <span class="ss">:recursive</span> <span class="no">t</span>
+          <span class="ss">:publishing-function</span> <span class="nv">org-publish-attachment</span><span class="p">)</span>
+
+    <span class="p">(</span><span class="s">&quot;myjek&quot;</span> <span class="ss">:components</span> <span class="p">(</span><span class="s">&quot;org-myjek&quot;</span> <span class="s">&quot;org-static-myjek&quot;</span><span class="p">))</span>
+
+<span class="p">))</span>
+</code></pre></div>
+
+<h2 id="11a-load-ido-completion">11a Load Ido completion</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;load-path</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/ido-completing-read+&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">autoload</span> <span class="ss">&#39;ido-completing-read+</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/ido-completing-read+&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nb">use-package</span> <span class="nv">ido-completing-read+</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="12-setting-org-completion">12 setting org completion</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp">
+<span class="c1">;;;######### (autoloads nil &quot;elpa/ido-completing-read+-20160319.2338/ido-completing-read+&quot;</span>
+<span class="c1">;;;;;;  &quot;elpa/ido-completing-read+-20160319.2338/ido-completing-read+.el&quot;</span>
+<span class="c1">;;;;;;  (22255 63168 617726 894000))</span>
+<span class="c1">;;; Generated autoloads from elpa/ido-completing-read+-20160319.2338/ido-completing-read+.el</span>
+
+<span class="p">(</span><span class="nb">defvar</span> <span class="nv">ido-cr+-enable-next-call</span> <span class="no">nil</span> <span class="s">&quot;\</span>
+<span class="s">If non-nil, then the next call to `ido-completing-read&#39; is by `ido-completing-read+&#39;.&quot;</span><span class="p">)</span>
+
+<span class="p">(</span><span class="nb">defvar</span> <span class="nv">ido-cr+-enable-this-call</span> <span class="no">nil</span> <span class="s">&quot;\</span>
+<span class="s">If non-nil, then the current call to `ido-completing-read&#39; is by `ido-completing-read+&#39;&quot;</span><span class="p">)</span>
+
+<span class="p">(</span><span class="nb">defvar</span> <span class="nv">ido-cr+-replace-completely</span> <span class="no">nil</span> <span class="s">&quot;\</span>
+<span class="s">If non-nil, replace `ido-completeing-read&#39; completely with ido-cr+.</span>
+
+<span class="s">Enabling this may interfere with or cause errors in other</span>
+<span class="s">packages that use `ido-completing-read&#39;. If you discover any such</span>
+<span class="s">incompatibilities, please file a bug report at</span>
+<span class="s">https://github.com/DarwinAwardWinner/ido-ubiquitous/issues&quot;</span><span class="p">)</span>
+
+<span class="p">(</span><span class="nv">custom-autoload</span> <span class="ss">&#39;ido-cr+-replace-completely</span> <span class="s">&quot;elpa/ido-completing-read+-20160319.2338/ido-completing-read+&quot;</span> <span class="no">t</span><span class="p">)</span>
+
+<span class="p">(</span><span class="nv">autoload</span> <span class="ss">&#39;ido-completing-read+</span> <span class="s">&quot;elpa/ido-completing-read+-20160319.2338/ido-completing-read+&quot;</span> <span class="s">&quot;\</span>
+<span class="s">ido-based method for reading from the minibuffer with completion.</span>
+
+<span class="s">See `completing-read&#39; for the meaning of the arguments.</span>
+
+<span class="s">This function is a wrapper for `ido-completing-read&#39; designed to</span>
+<span class="s">be used as the value of `completing-read-function&#39;. Importantly,</span>
+<span class="s">it detects edge cases that ido cannot handle and uses normal</span>
+<span class="s">completion for them.</span>
+
+<span class="s">\(fn PROMPT COLLECTION &amp;optional PREDICATE REQUIRE-MATCH INITIAL-INPUT HIST DEF INHERIT-INPUT-METHOD)&quot;</span> <span class="no">nil</span> <span class="no">nil</span><span class="p">)</span>
+
+<span class="p">(</span><span class="nv">defadvice</span> <span class="nv">ido-completing-read</span> <span class="p">(</span><span class="nv">around</span> <span class="nv">ido-cr+</span> <span class="nv">activate</span><span class="p">)</span> <span class="s">&quot;\</span>
+<span class="s">This advice handles application of ido-completing-read+ features.</span>
+
+<span class="s">First, it ensures that `ido-cr+-enable-this-call&#39; is set</span>
+<span class="s">properly. This variable should be non-nil during execution of</span>
+<span class="s">`ido-completing-read&#39; if it was called from</span>
+<span class="s">`ido-completing-read+&#39;.</span>
+
+<span class="s">Second, if `ido-cr+-replace-completely&#39; is non-nil, then this</span>
+<span class="s">advice completely replaces `ido-completing-read&#39; with</span>
+<span class="s">`ido-completing-read+&#39;.&quot;</span> <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">not</span> <span class="p">(</span><span class="nv">featurep</span> <span class="p">(</span><span class="k">quote</span> <span class="nv">ido-completing-read+</span><span class="p">)))</span> <span class="p">(</span><span class="nb">require</span> <span class="p">(</span><span class="k">quote</span> <span class="nv">ido-completing-read+</span><span class="p">)))</span> <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">ido-cr+-enable-this-call</span> <span class="nv">ido-cr+-enable-next-call</span><span class="p">)</span> <span class="p">(</span><span class="nv">ido-cr+-enable-next-call</span> <span class="no">nil</span><span class="p">))</span> <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">or</span> <span class="nv">ido-cr+-enable-this-call</span> <span class="p">(</span><span class="nb">not</span> <span class="nv">ido-cr+-replace-completely</span><span class="p">))</span> <span class="nv">ad-do-it</span> <span class="p">(</span><span class="nv">message</span> <span class="s">&quot;Replacing ido-completing-read&quot;</span><span class="p">)</span> <span class="p">(</span><span class="k">setq</span> <span class="nv">ad-return-value</span> <span class="p">(</span><span class="nb">apply</span> <span class="p">(</span><span class="k">function</span> <span class="nv">ido-completing-read+</span><span class="p">)</span> <span class="p">(</span><span class="nv">ad-get-args</span> <span class="mi">0</span><span class="p">))))))</span>
+
+<span class="p">(</span><span class="nb">defvar</span> <span class="nv">ido-context-switch-command</span> <span class="no">nil</span> <span class="s">&quot;\</span>
+<span class="s">Variable holding the command used for switching to another completion mode.</span>
+
+<span class="s">This variable is originally declared in `ido.el&#39;, but it is not</span>
+<span class="s">given a value (or a docstring). This documentation comes from a</span>
+<span class="s">re-declaration in `ido-completing-read+.el&#39; that initializes it</span>
+<span class="s">to nil, which should suppress some byte-compilation warnings in</span>
+<span class="s">Emacs 25. Setting another package&#39;s variable is not safe in</span>
+<span class="s">general, but in this case it should be, because ido always</span>
+<span class="s">let-binds this variable before using it, so the initial value</span>
+<span class="s">shouldn&#39;t matter.&quot;</span><span class="p">)</span>
+
+<span class="c1">;;; Set org completion with ido completion</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">org-completion-use-ido</span> <span class="no">t</span><span class="p">)</span>
+</code></pre></div>
+
+<p><a id="orga16d289"></a></p>
+
+<h2 id="13-load-solar-el">13 Load solar.el</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="c1">;;(add-to-list &#39;load-path &quot;/usr/share/emacs/24.5/lisp/calendar/solar.elc&quot; )</span>
+</code></pre></div>
+
+<h2 id="14-emacs-hacks-for-sunrise-and-sunset-times">14 Emacs hacks for sunrise and sunset times.</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="c1">;;--------------------------------------------------------------------------------</span>
+<span class="c1">;; Below are Org hacks that were extracted from worg and placed in</span>
+<span class="c1">;; orghacks.el. But need to be loaded along with DOTemacs.</span>
+<span class="c1">;;-------------------------------------------------------------------------------</span>
+<span class="c1">;; View Sunset and Sunrise in agenda and Diary</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">calendar-latitude</span> <span class="mf">33.053090</span><span class="p">)</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">calendar-longitude</span> <span class="mf">-84.156217</span><span class="p">)</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">calendar-location-name</span> <span class="s">&quot;Barnesville,Ga&quot;</span><span class="p">)</span>
+
+<span class="p">(</span><span class="nv">autoload</span> <span class="ss">&#39;solar-sunrise-sunset</span> <span class="s">&quot;solar.el&quot;</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">autoload</span> <span class="ss">&#39;solar-time-string</span> <span class="s">&quot;solar.el&quot;</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">diary-sunrise</span> <span class="p">()</span>
+  <span class="s">&quot;Local time of sunrise as a diary entry.</span>
+<span class="s">The diary entry can contain `%s&#39; which will be replaced with</span>
+<span class="s">`calendar-location-name&#39;.&quot;</span>
+  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">l</span> <span class="p">(</span><span class="nv">solar-sunrise-sunset</span> <span class="nv">date</span><span class="p">)))</span>
+    <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">car</span> <span class="nv">l</span><span class="p">)</span>
+      <span class="p">(</span><span class="nv">concat</span>
+       <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">string=</span> <span class="nv">entry</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
+           <span class="s">&quot;Sunrise&quot;</span>
+         <span class="p">(</span><span class="nb">format</span> <span class="nv">entry</span> <span class="p">(</span><span class="nb">eval</span> <span class="nv">calendar-location-name</span><span class="p">)))</span> <span class="s">&quot; &quot;</span>
+         <span class="p">(</span><span class="nv">solar-time-string</span> <span class="p">(</span><span class="nb">caar</span> <span class="nv">l</span><span class="p">)</span> <span class="no">nil</span><span class="p">)))))</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">diary-sunset</span> <span class="p">()</span>
+  <span class="s">&quot;Local time of sunset as a diary entry.</span>
+<span class="s">The diary entry can contain `%s&#39; which will be replaced with</span>
+<span class="s">`calendar-location-name&#39;.&quot;</span>
+  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">l</span> <span class="p">(</span><span class="nv">solar-sunrise-sunset</span> <span class="nv">date</span><span class="p">)))</span>
+    <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">cadr</span> <span class="nv">l</span><span class="p">)</span>
+      <span class="p">(</span><span class="nv">concat</span>
+       <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">string=</span> <span class="nv">entry</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
+           <span class="s">&quot;Sunset&quot;</span>
+         <span class="p">(</span><span class="nb">format</span> <span class="nv">entry</span> <span class="p">(</span><span class="nb">eval</span> <span class="nv">calendar-location-name</span><span class="p">)))</span> <span class="s">&quot; &quot;</span>
+         <span class="p">(</span><span class="nv">solar-time-string</span> <span class="p">(</span><span class="nb">caadr</span> <span class="nv">l</span><span class="p">)</span> <span class="no">nil</span><span class="p">)))))</span>
+</code></pre></div>
+
+<p><a id="orgd081e65"></a></p>
+
+<h2 id="15-load-lunar-phases">15 Load lunar phases</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="c1">;; View lunar phases in agenda-------------------------------------</span>
+<span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;cl-lib</span><span class="p">)</span>
+
+<span class="p">(</span><span class="nv">org-no-warnings</span> <span class="p">(</span><span class="nb">defvar</span> <span class="nv">date</span><span class="p">))</span> <span class="c1">;;-- Macro found in org-macs.el in</span>
+<span class="c1">;;plus repo</span>
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">org-lunar-phases</span> <span class="p">()</span>
+  <span class="s">&quot;Show lunar phase in Agenda buffer.&quot;</span>
+  <span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;lunar</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">let*</span> <span class="p">((</span><span class="nv">phase-list</span> <span class="p">(</span><span class="nv">lunar-phase-list</span> <span class="p">(</span><span class="nb">nth</span> <span class="mi">0</span> <span class="nv">date</span><span class="p">)</span> <span class="p">(</span><span class="nb">nth</span> <span class="mi">2</span> <span class="nv">date</span><span class="p">)))</span>
+         <span class="p">(</span><span class="nb">phase</span> <span class="p">(</span><span class="nv">cl-find-if</span> <span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="nb">phase</span><span class="p">)</span> <span class="p">(</span><span class="nb">equal</span> <span class="p">(</span><span class="nb">car</span> <span class="nb">phase</span><span class="p">)</span> <span class="nv">date</span><span class="p">))</span>
+                            <span class="nv">phase-list</span><span class="p">)))</span>
+    <span class="p">(</span><span class="nb">when</span> <span class="nb">phase</span>
+      <span class="p">(</span><span class="k">setq</span> <span class="nv">ret</span> <span class="p">(</span><span class="nv">concat</span> <span class="p">(</span><span class="nv">lunar-phase-name</span> <span class="p">(</span><span class="nb">nth</span> <span class="mi">2</span> <span class="nb">phase</span><span class="p">))</span> <span class="s">&quot; &quot;</span>
+                        <span class="p">(</span><span class="nv">substring</span> <span class="p">(</span><span class="nb">nth</span> <span class="mi">1</span> <span class="nb">phase</span><span class="p">)</span> <span class="mi">0</span> <span class="mi">5</span><span class="p">))))))</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">lunar-phase-names</span>
+      <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;● New Moon&quot;</span> <span class="c1">; Unicode symbol: 🌑 Use full circle as fallback</span>
+        <span class="s">&quot;☽ First Quarter Moon&quot;</span>
+        <span class="s">&quot;○ Full Moon&quot;</span> <span class="c1">; Unicode symbol: 🌕 Use empty circle as fallback</span>
+        <span class="s">&quot;☾ Last Quarter Moon&quot;</span><span class="p">))</span>
+</code></pre></div>
+
+<h2 id="16-allow-running-of-occur-in-all-files">16 allow running of occur in all files</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="c1">;; ;; ;; Open and run occur in file</span>
+ <span class="p">(</span><span class="nb">defun</span> <span class="nv">org-occur-open</span> <span class="p">(</span><span class="nv">uri</span><span class="p">)</span>
+   <span class="s">&quot;Visit the file specified by URI, and run `occur&#39; on the fragment\(anything after the first &#39;###&#39;) in the uri.&quot;</span>
+   <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nb">list</span> <span class="p">(</span><span class="nv">split-string</span> <span class="nv">uri</span> <span class="s">&quot;###&quot;</span><span class="p">)))</span>
+     <span class="p">(</span><span class="nv">org-open-file</span> <span class="p">(</span><span class="nb">car</span> <span class="nb">list</span><span class="p">)</span> <span class="no">t</span><span class="p">)</span>
+     <span class="p">(</span><span class="nv">occur</span> <span class="p">(</span><span class="nv">mapconcat</span> <span class="ss">&#39;identity</span> <span class="p">(</span><span class="nb">cdr</span> <span class="nb">list</span><span class="p">)</span> <span class="s">&quot;###&quot;</span><span class="p">))))</span>
+ <span class="p">(</span><span class="nv">org-add-link-type</span> <span class="s">&quot;occur&quot;</span> <span class="ss">&#39;org-occur-open</span><span class="p">)</span>
+</code></pre></div>
+
+<p><a id="orgf1c6ed2"></a></p>
+
+<h2 id="autoload-functions-disabled">Autoload Functions     :Disabled:</h2>
+
+<pre><code>;;  (defun my-update-autoloads ()
+;;    &quot;Call `update-autoloads-from-directories' on my local lisp directory.&quot;
+;;    (interactive)
+;;    (require 'autoload)
+;;    (let ((source-directory my-lisp-dir))
+;;      (update-autoloads-from-directories my-lisp-dir))
+;;    (byte-compile-file (concat my-lisp-dir &quot;autolisp/loaddefs.el&quot;)))
+;;(load (concat my-lisp-dir &quot;elpa/loaddefs&quot;) t)
+</code></pre>
+
+<h2 id="add-appt-reminders">add appt reminders</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="c1">;; Adding appt reminders --------------------------------------------</span>
+
+<span class="p">(</span><span class="nb">defvar</span> <span class="nv">bzg-org-clock-in-appt-delay</span> <span class="mi">100</span>
+  <span class="s">&quot;Number of minutes for setting an appointment by clocking-in&quot;</span><span class="p">)</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">bzg-org-clock-in-add-appt</span> <span class="p">(</span><span class="k">&amp;optional</span> <span class="nv">n</span><span class="p">)</span>
+  <span class="s">&quot;Add an appointment for the Org entry at point in N minutes.&quot;</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">save-excursion</span>
+    <span class="p">(</span><span class="nv">org-back-to-heading</span> <span class="no">t</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">looking-at</span> <span class="nv">org-complex-heading-regexp</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">let*</span> <span class="p">((</span><span class="nv">msg</span> <span class="p">(</span><span class="nv">match-string-no-properties</span> <span class="mi">4</span><span class="p">))</span>
+           <span class="p">(</span><span class="nv">ct-time</span> <span class="p">(</span><span class="nv">decode-time</span><span class="p">))</span>
+           <span class="p">(</span><span class="nv">appt-min</span> <span class="p">(</span><span class="nb">+</span> <span class="p">(</span><span class="nb">cadr</span> <span class="nv">ct-time</span><span class="p">)</span>
+                        <span class="p">(</span><span class="nb">or</span> <span class="nv">n</span> <span class="nv">bzg-org-clock-in-appt-delay</span><span class="p">)))</span>
+           <span class="p">(</span><span class="nv">appt-time</span> <span class="c1">; define the time for the appointment</span>
+            <span class="p">(</span><span class="k">progn</span> <span class="p">(</span><span class="nb">setf</span> <span class="p">(</span><span class="nb">cadr</span> <span class="nv">ct-time</span><span class="p">)</span> <span class="nv">appt-min</span><span class="p">)</span> <span class="nv">ct-time</span><span class="p">)))</span>
+      <span class="p">(</span><span class="nv">appt-add</span> <span class="p">(</span><span class="nv">format-time-string</span>
+                 <span class="s">&quot;%H:%M&quot;</span> <span class="p">(</span><span class="nb">apply</span> <span class="ss">&#39;encode-time</span> <span class="nv">appt-time</span><span class="p">))</span> <span class="nv">msg</span><span class="p">)</span>
+      <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nv">called-interactively-p</span><span class="p">)</span> <span class="p">(</span><span class="nv">message</span> <span class="s">&quot;New appointment for %s&quot;</span> <span class="nv">msg</span><span class="p">)))))</span>
+
+<span class="p">(</span><span class="nv">defadvice</span> <span class="nv">org-clock-in</span> <span class="p">(</span><span class="nv">after</span> <span class="nv">org-clock-in-add-appt</span> <span class="nv">activate</span><span class="p">)</span>
+  <span class="s">&quot;Add an appointment when clocking a task in.&quot;</span>
+  <span class="p">(</span><span class="nv">bzg-org-clock-in-add-appt</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">bzg-org-clock-out-delete-appt</span> <span class="no">nil</span>
+  <span class="s">&quot;When clocking out, delete any associated appointment.&quot;</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">save-excursion</span>
+    <span class="p">(</span><span class="nv">org-back-to-heading</span> <span class="no">t</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">looking-at</span> <span class="nv">org-complex-heading-regexp</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">let*</span> <span class="p">((</span><span class="nv">msg</span> <span class="p">(</span><span class="nv">match-string-no-properties</span> <span class="mi">4</span><span class="p">)))</span>
+      <span class="p">(</span><span class="k">setq</span> <span class="nv">appt-time-msg-list</span>
+            <span class="p">(</span><span class="nb">delete</span> <span class="no">nil</span>
+                    <span class="p">(</span><span class="nb">mapcar</span>
+                     <span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="nv">appt</span><span class="p">)</span>
+                       <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">not</span> <span class="p">(</span><span class="nv">string-match</span> <span class="p">(</span><span class="nv">regexp-quote</span> <span class="nv">msg</span><span class="p">)</span>
+                                              <span class="p">(</span><span class="nb">cadr</span> <span class="nv">appt</span><span class="p">)))</span> <span class="nv">appt</span><span class="p">))</span>
+                     <span class="nv">appt-time-msg-list</span><span class="p">)))</span>
+      <span class="p">(</span><span class="nv">appt-check</span><span class="p">))))</span>
+
+<span class="p">(</span><span class="nv">defadvice</span> <span class="nv">org-clock-out</span> <span class="p">(</span><span class="nv">before</span> <span class="nv">org-clock-out-delete-appt</span> <span class="nv">activate</span><span class="p">)</span>
+  <span class="s">&quot;Delete an appointment when clocking a task out.&quot;</span>
+  <span class="p">(</span><span class="nv">bzg-org-clock-out-delete-appt</span><span class="p">))</span>
+</code></pre></div>
+
+<h2 id="promote-all-headings">promote all headings</h2>
+
+<p>Currently it is believed that this setting does not do a damn thing. Currently disabled.</p>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="c1">;;; Promote all headings in subtree ------------------------------</span>
+
+<span class="c1">;(defun my-org-un-project ()</span>
+ <span class="c1">; (interactive)</span>
+<span class="c1">;  (org-map-entries &#39;org-do-promote &quot;LEVEL&gt;1&quot; &#39;tree)</span>
+  <span class="c1">;(org-cycle t))</span>
+</code></pre></div>
+
+<p><a id="orgdbd405d"></a></p>
+
+<h2 id="transpose-paragraphs-not-lines">Transpose paragraphs not lines</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="c1">;;; Transpose paragraphs not lines---------------------------------</span>
+ <span class="p">(</span><span class="nb">defun</span> <span class="nv">org-transpose-paragraphs</span> <span class="p">(</span><span class="nv">arg</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">and</span> <span class="p">(</span><span class="nb">not</span> <span class="p">(</span><span class="nb">or</span> <span class="p">(</span><span class="nv">org-at-table-p</span><span class="p">)</span> <span class="p">(</span><span class="nv">org-on-heading-p</span><span class="p">)</span> <span class="p">(</span><span class="nv">org-at-item-p</span><span class="p">)))</span>
+             <span class="p">(</span><span class="nv">thing-at-point</span> <span class="ss">&#39;sentence</span><span class="p">))</span>
+    <span class="p">(</span><span class="nv">transpose-paragraphs</span> <span class="nv">arg</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">backward-paragraph</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">re-search-forward</span> <span class="s">&quot;[[:graph:]]&quot;</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">goto-char</span> <span class="p">(</span><span class="nv">match-beginning</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="no">t</span><span class="p">))</span>
+
+ <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;org-metaup-hook</span> <span class="c1">;; ----&gt; Variable undefined</span>
+  <span class="p">(</span><span class="k">lambda</span> <span class="p">()</span> <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span> <span class="p">(</span><span class="nv">org-transpose-paragraphs</span> <span class="mi">-1</span><span class="p">)))</span>
+ <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;org-metadown-hook</span>
+  <span class="p">(</span><span class="k">lambda</span> <span class="p">()</span> <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span> <span class="p">(</span><span class="nv">org-transpose-paragraphs</span> <span class="mi">1</span><span class="p">)))</span>
+
+<span class="c1">;; --------------------------------------------------------------------------------</span>
+</code></pre></div>
+
+<p><a id="org1333a05"></a></p>
+
+<h2 id="lighten-up-running-of-agenda">Lighten up running of agenda</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="c1">;;-----------------------------------------------------------------------------</span>
+<span class="c1">;; Lighten up agenda load</span>
+<span class="c1">;;-----------------------------------------------------------------------------</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">org-agenda-dim-blocked-tasks</span> <span class="no">nil</span><span class="p">)</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">org-agenda-inhibit-startup</span> <span class="no">nil</span><span class="p">)</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">org-agenda-use-tag-inheritance</span> <span class="no">nil</span><span class="p">)</span>
+</code></pre></div>
+
+<p><a id="orgc9bcc9e"></a></p>
+
+<h2 id="use-idle-timer-to-set-agenda-view">Use idle timer to set agenda view</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="c1">;;(defun jump-to-org-agenda ()</span>
+<span class="c1">;;  (interactive)</span>
+<span class="c1">;;  (let ((buf (get-buffer &quot;*Org Agenda*&quot;))</span>
+<span class="c1">;;        wind)</span>
+<span class="c1">;;    (if buf</span>
+<span class="c1">;;        (if (setq wind (get-buffer-window buf))</span>
+<span class="c1">;;            (select-window wind)</span>
+<span class="c1">;;          (if (called-interactively-p)</span>
+<span class="c1">;;              (progn</span>
+<span class="c1">;;                (select-window (display-buffer buf t t))</span>
+<span class="c1">;;                (org-fit-window-to-buffer)</span>
+<span class="c1">;;                 (org-agenda-redo)</span>
+<span class="c1">;;                )</span>
+<span class="c1">;;            (with-selected-window (display-buffer buf)</span>
+<span class="c1">;;              (org-fit-window-to-buffer)</span>
+<span class="c1">;;               (org-agenda-redo)</span>
+<span class="c1">;;              )))</span>
+<span class="c1">;;      (call-interactively &#39;org-agenda-list)))</span>
+<span class="c1">;;  (let ((buf (get-buffer &quot;*Calendar*&quot;)))</span>
+<span class="c1">;;    (unless (get-buffer-window buf)</span>
+<span class="c1">;;      (org-agenda-goto-calendar)))</span>
+<span class="c1">;;  )</span>
+<span class="c1">;;</span>
+<span class="c1">;;(run-with-idle-timer 300 t &#39;jump-to-org-agenda)</span>
+</code></pre></div>
+
+<p><a id="org0be18fb"></a></p>
+
+<h2 id="refresh-agenda-view-regularly">Refresh agenda view regularly</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="c1">;; (defun kiwon/org-agenda-redo-in-other-window ()</span>
+<span class="c1">;;  &quot;Call org-agenda-redo function even in the non-agenda buffer.&quot;</span>
+<span class="c1">;;   (interactive)</span>
+<span class="c1">;;   (let ((agenda-window (get-buffer-window org-agenda-buffer-name t)))</span>
+<span class="c1">;;     (when agenda-window</span>
+<span class="c1">;;       (with-selected-window agenda-window (org-agenda-redo)))))</span>
+<span class="c1">;; (run-at-time nil 300 &#39;kiwon/org-agenda-redo-in-other-window)</span>
+</code></pre></div>
+
+<p><a id="org79d150d"></a></p>
+
+<h2 id="org-archive-all-done-command">org-archive-all-done command</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="c1">;;-----------------------------------------------------------------------------------</span>
+<span class="c1">;;  org archive all done</span>
+<span class="c1">;;-----------------------------------------------------------------------------------</span>
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">my-org-archive-done-tasks</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">org-map-entries</span> <span class="ss">&#39;org-archive-subtree</span> <span class="s">&quot;/DONE&quot;</span> <span class="ss">&#39;file</span><span class="p">))</span>
+<span class="c1">;;----------------------------------------------------------------------------------------</span>
+<span class="c1">;; Version below is incorrect and will be commented out, and eventually removed</span>
+<span class="c1">;;----------------------------------------------------------------------------------------</span>
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">org-archive-all-done</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">org-map-entries</span>
+   <span class="p">(</span><span class="k">lambda</span> <span class="p">()</span>
+     <span class="p">(</span><span class="nv">org-archive-subtree</span><span class="p">)</span>
+     <span class="p">(</span><span class="k">setq</span> <span class="nv">org-map-continue-from</span> <span class="p">(</span><span class="nv">outline-previous-heading</span><span class="p">)))</span>
+   <span class="s">&quot;/DONE&quot;</span> <span class="ss">&#39;file</span><span class="p">))</span>
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">org-archive-done-tasks</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">org-map-entries</span>
+   <span class="p">(</span><span class="k">lambda</span> <span class="p">()</span>
+     <span class="p">(</span><span class="nv">org-archive-subtree</span><span class="p">)</span>
+     <span class="p">(</span><span class="k">setq</span> <span class="nv">org-map-continue-from</span> <span class="p">(</span><span class="nv">outline-previous-heading</span><span class="p">)))</span>
+   <span class="s">&quot;/DONE&quot;</span> <span class="ss">&#39;tree</span><span class="p">))</span>
+</code></pre></div>
+
+<p><a id="org5bab68f"></a></p>
+
+<h2 id="go-back-to-the-previous-top-level">Go back to the previous top level</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">defun</span> <span class="nv">org-back-to-top-level-heading</span> <span class="p">()</span>
+  <span class="s">&quot;Go back to the current top level heading.&quot;</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb">or</span> <span class="p">(</span><span class="nv">re-search-backward</span> <span class="s">&quot;^\* &quot;</span> <span class="no">nil</span> <span class="no">t</span><span class="p">)</span>
+      <span class="p">(</span><span class="nv">goto-char</span> <span class="p">(</span><span class="nv">point-min</span><span class="p">))))</span>
+</code></pre></div>
+
+<p><a id="org82c99d4"></a></p>
+
+<h2 id="show-next-prev-heading">Show next/prev heading</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">defun</span> <span class="nv">ded/org-show-next-heading-tidily</span> <span class="p">()</span>
+  <span class="s">&quot;Show next entry, keeping other entries closed.&quot;</span>
+  <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nv">save-excursion</span> <span class="p">(</span><span class="nv">end-of-line</span><span class="p">)</span> <span class="p">(</span><span class="nv">outline-invisible-p</span><span class="p">))</span>
+      <span class="p">(</span><span class="k">progn</span> <span class="p">(</span><span class="nv">org-show-entry</span><span class="p">)</span> <span class="p">(</span><span class="nv">show-children</span><span class="p">))</span>
+    <span class="p">(</span><span class="nv">outline-next-heading</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nb">and</span> <span class="p">(</span><span class="nv">bolp</span><span class="p">)</span> <span class="p">(</span><span class="nv">org-on-heading-p</span><span class="p">))</span>
+      <span class="p">(</span><span class="nv">org-up-heading-safe</span><span class="p">)</span>
+      <span class="p">(</span><span class="nv">hide-subtree</span><span class="p">)</span>
+      <span class="p">(</span><span class="nb">error</span> <span class="s">&quot;Boundary reached&quot;</span><span class="p">))</span>
+    <span class="p">(</span><span class="nv">org-overview</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">org-reveal</span> <span class="no">t</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">org-show-entry</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">show-children</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">ded/org-show-previous-heading-tidily</span> <span class="p">()</span>
+  <span class="s">&quot;Show previous entry, keeping other entries closed.&quot;</span>
+  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">pos</span> <span class="p">(</span><span class="nv">point</span><span class="p">)))</span>
+    <span class="p">(</span><span class="nv">outline-previous-heading</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nb">and</span> <span class="p">(</span><span class="nb">&lt;</span> <span class="p">(</span><span class="nv">point</span><span class="p">)</span> <span class="nv">pos</span><span class="p">)</span> <span class="p">(</span><span class="nv">bolp</span><span class="p">)</span> <span class="p">(</span><span class="nv">org-on-heading-p</span><span class="p">))</span>
+      <span class="p">(</span><span class="nv">goto-char</span> <span class="nv">pos</span><span class="p">)</span>
+      <span class="p">(</span><span class="nv">hide-subtree</span><span class="p">)</span>
+      <span class="p">(</span><span class="nb">error</span> <span class="s">&quot;Boundary reached&quot;</span><span class="p">))</span>
+    <span class="p">(</span><span class="nv">org-overview</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">org-reveal</span> <span class="no">t</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">org-show-entry</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">show-children</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="k">setq</span> <span class="nv">org-use-speed-commands</span> <span class="no">t</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;org-speed-commands-user</span>
+             <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;n&quot;</span> <span class="nv">ded/org-show-next-heading-tidily</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;org-speed-commands-user</span>
+             <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;p&quot;</span> <span class="nv">ded/org-show-previous-heading-tidily</span><span class="p">))</span>
+</code></pre></div>
+
+<p><a id="org5a72415"></a></p>
+
+<h2 id="manipulate-time-in-tables">Manipulate time in tables</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">defun</span> <span class="nv">org-time-string-to-seconds</span> <span class="p">(</span><span class="nv">s</span><span class="p">)</span>
+  <span class="s">&quot;Convert a string HH:MM:SS to a number of seconds.&quot;</span>
+  <span class="p">(</span><span class="nb">cond</span>
+   <span class="p">((</span><span class="nb">and</span> <span class="p">(</span><span class="nb">stringp</span> <span class="nv">s</span><span class="p">)</span>
+         <span class="p">(</span><span class="nv">string-match</span> <span class="s">&quot;\\([0-9]+\\):\\([0-9]+\\):\\([0-9]+\\)&quot;</span> <span class="nv">s</span><span class="p">))</span>
+    <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">hour</span> <span class="p">(</span><span class="nv">string-to-number</span> <span class="p">(</span><span class="nv">match-string</span> <span class="mi">1</span> <span class="nv">s</span><span class="p">)))</span>
+          <span class="p">(</span><span class="nb">min</span> <span class="p">(</span><span class="nv">string-to-number</span> <span class="p">(</span><span class="nv">match-string</span> <span class="mi">2</span> <span class="nv">s</span><span class="p">)))</span>
+          <span class="p">(</span><span class="nv">sec</span> <span class="p">(</span><span class="nv">string-to-number</span> <span class="p">(</span><span class="nv">match-string</span> <span class="mi">3</span> <span class="nv">s</span><span class="p">))))</span>
+      <span class="p">(</span><span class="nb">+</span> <span class="p">(</span><span class="nb">*</span> <span class="nv">hour</span> <span class="mi">3600</span><span class="p">)</span> <span class="p">(</span><span class="nb">*</span> <span class="nb">min</span> <span class="mi">60</span><span class="p">)</span> <span class="nv">sec</span><span class="p">)))</span>
+   <span class="p">((</span><span class="nb">and</span> <span class="p">(</span><span class="nb">stringp</span> <span class="nv">s</span><span class="p">)</span>
+         <span class="p">(</span><span class="nv">string-match</span> <span class="s">&quot;\\([0-9]+\\):\\([0-9]+\\)&quot;</span> <span class="nv">s</span><span class="p">))</span>
+    <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nb">min</span> <span class="p">(</span><span class="nv">string-to-number</span> <span class="p">(</span><span class="nv">match-string</span> <span class="mi">1</span> <span class="nv">s</span><span class="p">)))</span>
+          <span class="p">(</span><span class="nv">sec</span> <span class="p">(</span><span class="nv">string-to-number</span> <span class="p">(</span><span class="nv">match-string</span> <span class="mi">2</span> <span class="nv">s</span><span class="p">))))</span>
+      <span class="p">(</span><span class="nb">+</span> <span class="p">(</span><span class="nb">*</span> <span class="nb">min</span> <span class="mi">60</span><span class="p">)</span> <span class="nv">sec</span><span class="p">)))</span>
+   <span class="p">((</span><span class="nb">stringp</span> <span class="nv">s</span><span class="p">)</span> <span class="p">(</span><span class="nv">string-to-number</span> <span class="nv">s</span><span class="p">))</span>
+   <span class="p">(</span><span class="no">t</span> <span class="nv">s</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">org-time-seconds-to-string</span> <span class="p">(</span><span class="nv">secs</span><span class="p">)</span>
+  <span class="s">&quot;Convert a number of seconds to a time string.&quot;</span>
+  <span class="p">(</span><span class="nb">cond</span> <span class="p">((</span><span class="nb">&gt;=</span> <span class="nv">secs</span> <span class="mi">3600</span><span class="p">)</span> <span class="p">(</span><span class="nv">format-seconds</span> <span class="s">&quot;%h:%.2m:%.2s&quot;</span> <span class="nv">secs</span><span class="p">))</span>
+        <span class="p">((</span><span class="nb">&gt;=</span> <span class="nv">secs</span> <span class="mi">60</span><span class="p">)</span> <span class="p">(</span><span class="nv">format-seconds</span> <span class="s">&quot;%m:%.2s&quot;</span> <span class="nv">secs</span><span class="p">))</span>
+        <span class="p">(</span><span class="no">t</span> <span class="p">(</span><span class="nv">format-seconds</span> <span class="s">&quot;%s&quot;</span> <span class="nv">secs</span><span class="p">))))</span>
+
+<span class="p">(</span><span class="nb">defmacro</span> <span class="nv">with-time</span> <span class="p">(</span><span class="nv">time-output-p</span> <span class="k">&amp;rest</span> <span class="nv">exprs</span><span class="p">)</span>
+  <span class="s">&quot;Evaluate an org-table formula, converting all fields that look</span>
+<span class="s">like time data to integer seconds.  If TIME-OUTPUT-P then return</span>
+<span class="s">the result as a time value.&quot;</span>
+  <span class="p">(</span><span class="nb">list</span>
+   <span class="p">(</span><span class="k">if</span> <span class="nv">time-output-p</span> <span class="ss">&#39;org-time-seconds-to-string</span> <span class="ss">&#39;identity</span><span class="p">)</span>
+   <span class="p">(</span><span class="nb">cons</span> <span class="ss">&#39;progn</span>
+         <span class="p">(</span><span class="nb">mapcar</span>
+          <span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="nv">expr</span><span class="p">)</span>
+            <span class="o">`,</span><span class="p">(</span><span class="nb">cons</span> <span class="p">(</span><span class="nb">car</span> <span class="nv">expr</span><span class="p">)</span>
+                    <span class="p">(</span><span class="nb">mapcar</span>
+                     <span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="nv">el</span><span class="p">)</span>
+                       <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">listp</span> <span class="nv">el</span><span class="p">)</span>
+                           <span class="p">(</span><span class="nb">list</span> <span class="ss">&#39;with-time</span> <span class="no">nil</span> <span class="nv">el</span><span class="p">)</span>
+                         <span class="p">(</span><span class="nv">org-time-string-to-seconds</span> <span class="nv">el</span><span class="p">)))</span>
+                     <span class="p">(</span><span class="nb">cdr</span> <span class="nv">expr</span><span class="p">))))</span>
+          <span class="o">`,@</span><span class="nv">exprs</span><span class="p">))))</span>
+</code></pre></div>
+
+<p><a id="orgeb049d5"></a></p>
+
+<h2 id="preserve-headings-when-archiving">Preserve headings when archiving</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">defun</span> <span class="nv">my-org-inherited-no-file-tags</span> <span class="p">()</span>
+  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">tags</span> <span class="p">(</span><span class="nv">org-entry-get</span> <span class="no">nil</span> <span class="s">&quot;ALLTAGS&quot;</span> <span class="ss">&#39;selective</span><span class="p">))</span>
+        <span class="p">(</span><span class="nv">ltags</span> <span class="p">(</span><span class="nv">org-entry-get</span> <span class="no">nil</span> <span class="s">&quot;TAGS&quot;</span><span class="p">)))</span>
+    <span class="p">(</span><span class="nb">mapc</span> <span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="nv">tag</span><span class="p">)</span>
+            <span class="p">(</span><span class="k">setq</span> <span class="nv">tags</span>
+                  <span class="p">(</span><span class="nv">replace-regexp-in-string</span> <span class="p">(</span><span class="nv">concat</span> <span class="nv">tag</span> <span class="s">&quot;:&quot;</span><span class="p">)</span> <span class="s">&quot;&quot;</span> <span class="nv">tags</span><span class="p">)))</span>
+          <span class="p">(</span><span class="nb">append</span> <span class="nv">org-file-tags</span> <span class="p">(</span><span class="nb">when</span> <span class="nv">ltags</span> <span class="p">(</span><span class="nv">split-string</span> <span class="nv">ltags</span> <span class="s">&quot;:&quot;</span> <span class="no">t</span><span class="p">))))</span>
+    <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">string=</span> <span class="s">&quot;:&quot;</span> <span class="nv">tags</span><span class="p">)</span> <span class="no">nil</span> <span class="nv">tags</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="nv">defadvice</span> <span class="nv">org-archive-subtree</span> <span class="p">(</span><span class="nv">around</span> <span class="nv">my-org-archive-subtree-low-level</span> <span class="nv">activate</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">tags</span> <span class="p">(</span><span class="nv">my-org-inherited-no-file-tags</span><span class="p">))</span>
+        <span class="p">(</span><span class="nv">org-archive-locati</span> <span class="nv">[[smartparens-20160614.1248]]</span> <span class="nv">on</span>
+         <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nv">save-excursion</span> <span class="p">(</span><span class="nv">org-back-to-heading</span><span class="p">)</span>
+                             <span class="p">(</span><span class="nb">&gt;</span> <span class="p">(</span><span class="nv">org-outline-level</span><span class="p">)</span> <span class="mi">1</span><span class="p">))</span>
+             <span class="p">(</span><span class="nv">concat</span> <span class="p">(</span><span class="nb">car</span> <span class="p">(</span><span class="nv">split-string</span> <span class="nv">org-archive-location</span> <span class="s">&quot;::&quot;</span><span class="p">))</span>
+                     <span class="s">&quot;::* &quot;</span>
+                     <span class="p">(</span><span class="nb">car</span> <span class="p">(</span><span class="nv">org-get-outline-path</span><span class="p">)))</span>
+           <span class="nv">org-archive-location</span><span class="p">)))</span>
+    <span class="nv">ad-do-it</span>
+    <span class="p">(</span><span class="nv">with-current-buffer</span> <span class="p">(</span><span class="nv">find-file-noselect</span> <span class="p">(</span><span class="nv">org-extract-archive-file</span><span class="p">))</span>
+      <span class="p">(</span><span class="nv">save-excursion</span>
+        <span class="p">(</span><span class="nv">while</span> <span class="p">(</span><span class="nv">org-up-heading-safe</span><span class="p">))</span>
+        <span class="p">(</span><span class="nv">org-set-tags-to</span> <span class="nv">tags</span><span class="p">)))))</span>
+</code></pre></div>
+
+<p><a id="org3012935"></a></p>
+
+<h2 id="archive-inside-of-a-datetree">Archive inside of a datetree</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="c1">;; (setq org-archive-location &quot;%s_archive::date-tree&quot;)</span>
+<span class="p">(</span><span class="nv">defadvice</span> <span class="nv">org-archive-subtree</span>
+  <span class="p">(</span><span class="nv">around</span> <span class="nv">org-archive-subtree-to-data-tree</span> <span class="nv">activate</span><span class="p">)</span>
+  <span class="s">&quot;org-archive-subtree to date-tree&quot;</span>
+  <span class="p">(</span><span class="k">if</span>
+      <span class="p">(</span><span class="nb">string=</span> <span class="s">&quot;date-tree&quot;</span>
+               <span class="p">(</span><span class="nv">org-extract-archive-heading</span>
+                <span class="p">(</span><span class="nv">org-get-local-archive-location</span><span class="p">)))</span>
+      <span class="p">(</span><span class="k">let*</span> <span class="p">((</span><span class="nv">dct</span> <span class="p">(</span><span class="nv">decode-time</span> <span class="p">(</span><span class="nv">org-current-time</span><span class="p">)))</span>
+             <span class="p">(</span><span class="nv">y</span> <span class="p">(</span><span class="nb">nth</span> <span class="mi">5</span> <span class="nv">dct</span><span class="p">))</span>
+             <span class="p">(</span><span class="nv">m</span> <span class="p">(</span><span class="nb">nth</span> <span class="mi">4</span> <span class="nv">dct</span><span class="p">))</span>
+             <span class="p">(</span><span class="nv">d</span> <span class="p">(</span><span class="nb">nth</span> <span class="mi">3</span> <span class="nv">dct</span><span class="p">))</span>
+             <span class="p">(</span><span class="nv">this-buffer</span> <span class="p">(</span><span class="nv">current-buffer</span><span class="p">))</span>
+             <span class="p">(</span><span class="nv">location</span> <span class="p">(</span><span class="nv">org-get-local-archive-location</span><span class="p">))</span>
+             <span class="p">(</span><span class="nv">afile</span> <span class="p">(</span><span class="nv">org-extract-archive-file</span> <span class="nv">location</span><span class="p">))</span>
+             <span class="p">(</span><span class="nv">org-archive-location</span>
+              <span class="p">(</span><span class="nb">format</span> <span class="s">&quot;%s::*** %04d-%02d-%02d %s&quot;</span> <span class="nv">afile</span> <span class="nv">y</span> <span class="nv">m</span> <span class="nv">d</span>
+                      <span class="p">(</span><span class="nv">format-time-string</span> <span class="s">&quot;%A&quot;</span> <span class="p">(</span><span class="nv">encode-time</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="nv">d</span> <span class="nv">m</span> <span class="nv">y</span><span class="p">)))))</span>
+        <span class="p">(</span><span class="nv">message</span> <span class="s">&quot;afile=%s&quot;</span> <span class="nv">afile</span><span class="p">)</span>
+        <span class="p">(</span><span class="nb">unless</span> <span class="nv">afile</span>
+          <span class="p">(</span><span class="nb">error</span> <span class="s">&quot;Invalid `org-archive-location&#39;&quot;</span><span class="p">))</span>
+        <span class="p">(</span><span class="nv">save-excursion</span>
+          <span class="p">(</span><span class="nv">switch-to-buffer</span> <span class="p">(</span><span class="nv">find-file-noselect</span> <span class="nv">afile</span><span class="p">))</span>
+          <span class="p">(</span><span class="nv">org-datetree-find-year-create</span> <span class="nv">y</span><span class="p">)</span>
+          <span class="p">(</span><span class="nv">org-datetree-find-month-create</span> <span class="nv">y</span> <span class="nv">m</span><span class="p">)</span>
+          <span class="p">(</span><span class="nv">org-datetree-find-day-create</span> <span class="nv">y</span> <span class="nv">m</span> <span class="nv">d</span><span class="p">)</span>
+          <span class="p">(</span><span class="nv">widen</span><span class="p">)</span>
+          <span class="p">(</span><span class="nv">switch-to-buffer</span> <span class="nv">this-buffer</span><span class="p">))</span>
+        <span class="nv">ad-do-it</span><span class="p">)</span>
+    <span class="nv">ad-do-it</span><span class="p">))</span>
+</code></pre></div>
+
+<p><a id="org542908a"></a></p>
+
+<h2 id="group-task-list-by-property">Group Task list by property</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">defvar</span> <span class="nv">org-agenda-group-by-property</span> <span class="no">nil</span>
+  <span class="s">&quot;Set this in org-mode agenda views to group tasks by property&quot;</span><span class="p">)</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">org-group-bucket-items</span> <span class="p">(</span><span class="nv">prop</span> <span class="nv">items</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">buckets</span> <span class="p">()))</span>
+    <span class="p">(</span><span class="nb">dolist</span> <span class="p">(</span><span class="nv">item</span> <span class="nv">items</span><span class="p">)</span>
+      <span class="p">(</span><span class="k">let*</span> <span class="p">((</span><span class="nv">marker</span> <span class="p">(</span><span class="nv">get-text-property</span> <span class="mi">0</span> <span class="ss">&#39;org-marker</span> <span class="nv">item</span><span class="p">))</span>
+             <span class="p">(</span><span class="nv">pvalue</span> <span class="p">(</span><span class="nv">org-entry-get</span> <span class="nv">marker</span> <span class="nv">prop</span> <span class="no">t</span><span class="p">))</span>
+             <span class="p">(</span><span class="nv">cell</span> <span class="p">(</span><span class="nb">assoc</span> <span class="nv">pvalue</span> <span class="nv">buckets</span><span class="p">)))</span>
+        <span class="p">(</span><span class="k">if</span> <span class="nv">cell</span>
+            <span class="p">(</span><span class="nv">setcdr</span> <span class="nv">cell</span> <span class="p">(</span><span class="nb">cons</span> <span class="nv">item</span> <span class="p">(</span><span class="nb">cdr</span> <span class="nv">cell</span><span class="p">)))</span>
+          <span class="p">(</span><span class="k">setq</span> <span class="nv">buckets</span> <span class="p">(</span><span class="nb">cons</span> <span class="p">(</span><span class="nb">cons</span> <span class="nv">pvalue</span> <span class="p">(</span><span class="nb">list</span> <span class="nv">item</span><span class="p">))</span>
+                              <span class="nv">buckets</span><span class="p">)))))</span>
+    <span class="p">(</span><span class="k">setq</span> <span class="nv">buckets</span> <span class="p">(</span><span class="nb">mapcar</span> <span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="nv">bucket</span><span class="p">)</span>
+                            <span class="p">(</span><span class="nb">cons</span> <span class="p">(</span><span class="nb">car</span> <span class="nv">bucket</span><span class="p">)</span>
+                                  <span class="p">(</span><span class="nb">reverse</span> <span class="p">(</span><span class="nb">cdr</span> <span class="nv">bucket</span><span class="p">))))</span>
+                          <span class="nv">buckets</span><span class="p">))</span>
+    <span class="p">(</span><span class="nb">sort</span> <span class="nv">buckets</span> <span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="nv">i1</span> <span class="nv">i2</span><span class="p">)</span>
+                    <span class="p">(</span><span class="nb">string&lt;</span> <span class="p">(</span><span class="nb">car</span> <span class="nv">i1</span><span class="p">)</span> <span class="p">(</span><span class="nb">car</span> <span class="nv">i2</span><span class="p">))))))</span>
+
+<span class="p">(</span><span class="nv">defadvice</span> <span class="nv">org-finalize-agenda-entries</span> <span class="p">(</span><span class="nv">around</span> <span class="nv">org-group-agenda-finalize</span>
+                                               <span class="p">(</span><span class="nb">list</span> <span class="k">&amp;optional</span> <span class="nv">nosort</span><span class="p">))</span>
+  <span class="s">&quot;Prepare bucketed agenda entry lists&quot;</span>
+  <span class="p">(</span><span class="k">if</span> <span class="nv">org-agenda-group-by-property</span>
+      <span class="c1">;; bucketed, handle appropriately</span>
+      <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">text</span> <span class="s">&quot;&quot;</span><span class="p">))</span>
+        <span class="p">(</span><span class="nb">dolist</span> <span class="p">(</span><span class="nv">bucket</span> <span class="p">(</span><span class="nv">org-group-bucket-items</span>
+                         <span class="nv">org-agenda-group-by-property</span>
+                         <span class="nb">list</span><span class="p">))</span>
+          <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">header</span> <span class="p">(</span><span class="nv">concat</span> <span class="s">&quot;Property &quot;</span>
+                                <span class="nv">org-agenda-group-by-property</span>
+                                <span class="s">&quot; is &quot;</span>
+                                <span class="p">(</span><span class="nb">or</span> <span class="p">(</span><span class="nb">car</span> <span class="nv">bucket</span><span class="p">)</span> <span class="s">&quot;&lt;nil&gt;&quot;</span><span class="p">)</span> <span class="s">&quot;:\n&quot;</span><span class="p">)))</span>
+            <span class="p">(</span><span class="nv">add-text-properties</span> <span class="mi">0</span> <span class="p">(</span><span class="nb">1-</span> <span class="p">(</span><span class="nb">length</span> <span class="nv">header</span><span class="p">))</span>
+                                 <span class="p">(</span><span class="nb">list</span> <span class="ss">&#39;face</span> <span class="ss">&#39;org-agenda-structure</span><span class="p">)</span>
+                                 <span class="nv">header</span><span class="p">)</span>
+            <span class="p">(</span><span class="k">setq</span> <span class="nv">text</span>
+                  <span class="p">(</span><span class="nv">concat</span> <span class="nv">text</span> <span class="nv">header</span>
+                          <span class="c1">;; recursively process</span>
+                          <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">org-agenda-group-by-property</span> <span class="no">nil</span><span class="p">))</span>
+                            <span class="p">(</span><span class="nv">org-finalize-agenda-entries</span>
+                             <span class="p">(</span><span class="nb">cdr</span> <span class="nv">bucket</span><span class="p">)</span> <span class="nv">nosort</span><span class="p">))</span>
+                          <span class="s">&quot;\n\n&quot;</span><span class="p">))))</span>
+        <span class="p">(</span><span class="k">setq</span> <span class="nv">ad-return-value</span> <span class="nv">text</span><span class="p">))</span>
+    <span class="nv">ad-do-it</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">ad-activate</span> <span class="ss">&#39;org-finalize-agenda-entries</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="mark-subtree-done-with-all-subheadings">Mark subtree done with all subheadings</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">defun</span> <span class="nv">bh/mark-subtree-done</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">org-mark-subtree</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">limit</span> <span class="p">(</span><span class="nv">point</span><span class="p">)))</span>
+    <span class="p">(</span><span class="nv">save-excursion</span>
+      <span class="p">(</span><span class="nv">exchange-point-and-mark</span><span class="p">)</span>
+      <span class="p">(</span><span class="nv">while</span> <span class="p">(</span><span class="nb">&gt;</span> <span class="p">(</span><span class="nv">point</span><span class="p">)</span> <span class="nv">limit</span><span class="p">)</span>
+        <span class="p">(</span><span class="nv">org-todo</span> <span class="s">&quot;DONE&quot;</span><span class="p">)</span>
+        <span class="p">(</span><span class="nv">outline-previous-visible-heading</span> <span class="mi">1</span><span class="p">))</span>
+      <span class="p">(</span><span class="nv">org-todo</span> <span class="s">&quot;DONE&quot;</span><span class="p">))))</span>
+</code></pre></div>
+
+<h2 id="mark-item-done-when-checkboxes-are-all-done">Mark item done when checkboxes are all done</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="c1">;; see http://thread.gmane.org/gmane.emacs.orgmode/42715</span>
+<span class="p">(</span><span class="nv">eval-after-load</span> <span class="ss">&#39;org-list</span>
+  <span class="o">&#39;</span><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;org-checkbox-statistics-hook</span> <span class="p">(</span><span class="k">function</span> <span class="nv">ndk/checkbox-list-complete</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">ndk/checkbox-list-complete</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nv">save-excursion</span>
+    <span class="p">(</span><span class="nv">org-back-to-heading</span> <span class="no">t</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">beg</span> <span class="p">(</span><span class="nv">point</span><span class="p">))</span> <span class="nv">end</span><span class="p">)</span>
+      <span class="p">(</span><span class="nv">end-of-line</span><span class="p">)</span>
+      <span class="p">(</span><span class="k">setq</span> <span class="nv">end</span> <span class="p">(</span><span class="nv">point</span><span class="p">))</span>
+      <span class="p">(</span><span class="nv">goto-char</span> <span class="nv">beg</span><span class="p">)</span>
+      <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nv">re-search-forward</span> <span class="s">&quot;\\[\\([0-9]*%\\)\\]\\|\\[\\([0-9]*\\)/\\([0-9]*\\)\\]&quot;</span> <span class="nv">end</span> <span class="no">t</span><span class="p">)</span>
+            <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nv">match-end</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">equal</span> <span class="p">(</span><span class="nv">match-string</span> <span class="mi">1</span><span class="p">)</span> <span class="s">&quot;100%&quot;</span><span class="p">)</span>
+                    <span class="c1">;; all done - do the state change</span>
+                    <span class="p">(</span><span class="nv">org-todo</span> <span class="ss">&#39;done</span><span class="p">)</span>
+                  <span class="p">(</span><span class="nv">org-todo</span> <span class="ss">&#39;todo</span><span class="p">))</span>
+              <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">and</span> <span class="p">(</span><span class="nb">&gt;</span> <span class="p">(</span><span class="nv">match-end</span> <span class="mi">2</span><span class="p">)</span> <span class="p">(</span><span class="nv">match-beginning</span> <span class="mi">2</span><span class="p">))</span>
+                       <span class="p">(</span><span class="nb">equal</span> <span class="p">(</span><span class="nv">match-string</span> <span class="mi">2</span><span class="p">)</span> <span class="p">(</span><span class="nv">match-string</span> <span class="mi">3</span><span class="p">)))</span>
+                  <span class="p">(</span><span class="nv">org-todo</span> <span class="ss">&#39;done</span><span class="p">)</span>
+                <span class="p">(</span><span class="nv">org-todo</span> <span class="ss">&#39;todo</span><span class="p">)))))))</span>
+</code></pre></div>
+
+<p><a id="org0e223cc"></a></p>
+
+<h2 id="calculate-time-differences">Calculate Time Differences</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">defun</span> <span class="nv">aw/org-evaluate-time-range</span> <span class="p">(</span><span class="k">&amp;optional</span> <span class="nv">to-buffer</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nv">org-at-date-range-p</span> <span class="no">t</span><span class="p">)</span>
+      <span class="p">(</span><span class="nv">org-evaluate-time-range</span> <span class="nv">to-buffer</span><span class="p">)</span>
+    <span class="c1">;; otherwise, make a time range in a temp buffer and run o-e-t-r there</span>
+    <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">headline</span> <span class="p">(</span><span class="nv">buffer-substring</span> <span class="p">(</span><span class="nv">point-at-bol</span><span class="p">)</span> <span class="p">(</span><span class="nv">point-at-eol</span><span class="p">))))</span>
+      <span class="p">(</span><span class="nv">with-temp-buffer</span>
+        <span class="p">(</span><span class="nv">insert</span> <span class="nv">headline</span><span class="p">)</span>
+        <span class="p">(</span><span class="nv">goto-char</span> <span class="p">(</span><span class="nv">point-at-bol</span><span class="p">))</span>
+        <span class="p">(</span><span class="nv">re-search-forward</span> <span class="nv">org-ts-regexp</span> <span class="p">(</span><span class="nv">point-at-eol</span><span class="p">)</span> <span class="no">t</span><span class="p">)</span>
+        <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">not</span> <span class="p">(</span><span class="nv">org-at-timestamp-p</span> <span class="no">t</span><span class="p">))</span>
+            <span class="p">(</span><span class="nb">error</span> <span class="s">&quot;No timestamp here&quot;</span><span class="p">))</span>
+        <span class="p">(</span><span class="nv">goto-char</span> <span class="p">(</span><span class="nv">match-beginning</span> <span class="mi">0</span><span class="p">))</span>
+        <span class="p">(</span><span class="nv">org-insert-time-stamp</span> <span class="p">(</span><span class="nv">current-time</span><span class="p">)</span> <span class="no">nil</span> <span class="no">nil</span><span class="p">)</span>
+        <span class="p">(</span><span class="nv">insert</span> <span class="s">&quot;--&quot;</span><span class="p">)</span>
+        <span class="p">(</span><span class="nv">org-evaluate-time-range</span> <span class="nv">to-buffer</span><span class="p">)))))</span>
+</code></pre></div>
+
+<h2 id="convert-csv-to-org-table">Convert csv to org-table</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">defun</span> <span class="nv">yf/lisp-table-to-org-table</span> <span class="p">(</span><span class="nv">table</span> <span class="k">&amp;optional</span> <span class="k">function</span><span class="p">)</span>
+  <span class="s">&quot;Convert a lisp table to `org-mode&#39; syntax, applying FUNCTION to each of its elements.</span>
+<span class="s">The elements should not have any more newlines in them after</span>
+<span class="s">applying FUNCTION ; the default converts them to space. Return</span>
+<span class="s">value is a string containg the unaligned `org-mode&#39; table.&quot;</span>
+  <span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nb">functionp</span> <span class="k">function</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">setq</span> <span class="k">function</span> <span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="nv">x</span><span class="p">)</span> <span class="p">(</span><span class="nv">replace-regexp-in-string</span> <span class="s">&quot;\n&quot;</span> <span class="s">&quot; &quot;</span> <span class="nv">x</span><span class="p">))))</span>
+  <span class="p">(</span><span class="nv">mapconcat</span> <span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="nv">x</span><span class="p">)</span>                <span class="c1">; x is a line.</span>
+               <span class="p">(</span><span class="nv">concat</span> <span class="s">&quot;| &quot;</span> <span class="p">(</span><span class="nv">mapconcat</span> <span class="k">function</span> <span class="nv">x</span> <span class="s">&quot; | &quot;</span><span class="p">)</span> <span class="s">&quot; |&quot;</span><span class="p">))</span>
+             <span class="nv">table</span> <span class="s">&quot;\n&quot;</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">yf/csv-to-table</span> <span class="p">(</span><span class="nv">beg</span> <span class="nv">end</span><span class="p">)</span>
+<span class="s">&quot;Convert a csv file to an `org-mode&#39; table.&quot;</span>
+  <span class="p">(</span><span class="nv">interactive</span> <span class="s">&quot;r&quot;</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;pcsv</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">insert</span> <span class="p">(</span><span class="nv">yf/lisp-table-to-org-table</span> <span class="p">(</span><span class="nv">pcsv-parse-region</span> <span class="nv">beg</span> <span class="nv">end</span><span class="p">)))</span>
+  <span class="p">(</span><span class="nv">delete-region</span> <span class="nv">beg</span> <span class="nv">end</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">org-table-align</span><span class="p">))</span>
+</code></pre></div>
+
+<p><a id="org32ca8b7"></a></p>
+
+<h2 id="clocking-time-from-sachachua">Clocking time from sachachua</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="c1">;; (eval-after-load &#39;org</span>
+<span class="c1">;;   &#39;(progn</span>
+<span class="c1">;;      (defun wicked/org-clock-in-if-starting ()</span>
+<span class="c1">;;        &quot;Clock in when the task is marked STARTED.&quot;</span>
+<span class="c1">;;        (when (and (string= state &quot;STARTED&quot;)</span>
+<span class="c1">;;                   (not (string= last-state state)))</span>
+<span class="c1">;;          (org-clock-in)))</span>
+<span class="c1">;;      (add-hook &#39;org-after-todo-state-change-hook</span>
+<span class="c1">;;                &#39;wicked/org-clock-in-if-starting)</span>
+<span class="c1">;;      (defadvice org-clock-in (after wicked activate)</span>
+<span class="c1">;;       &quot;Set this task&#39;s status to &#39;STARTED&#39;.&quot;</span>
+<span class="c1">;;       (org-todo &quot;STARTED&quot;))</span>
+<span class="c1">;;     (defun wicked/org-clock-out-if-waiting ()</span>
+<span class="c1">;;       &quot;Clock out when the task is marked WAITING.&quot;</span>
+<span class="c1">;;       (when (and (string= state &quot;WAITING&quot;)</span>
+<span class="c1">;;                  (equal (marker-buffer org-clock-marker) (current-buffer))</span>
+<span class="c1">;;                  (&lt; (point) org-clock-marker)</span>
+<span class="c1">;;                  (&gt; (save-excursion (outline-next-heading) (point))</span>
+<span class="c1">;;                     org-clock-marker)</span>
+<span class="c1">;;                  (not (string= last-state state)))</span>
+<span class="c1">;;         (org-clock-out)))</span>
+<span class="c1">;;     (add-hook &#39;org-after-todo-state-change-hook</span>
+<span class="c1">;;               &#39;wicked/org-clock-out-if-waiting)))</span>
+<span class="c1">;; ----------------------------------------------------------------------------</span>
+<span class="c1">;; next block added from sachachua</span>
+<span class="c1">;; ----------------------------------------------------------------------------</span>
+<span class="c1">;; (defun org-dblock-write:rangereport (params)</span>
+<span class="c1">;;   &quot;Display day-by-day time reports.&quot;</span>
+<span class="c1">;;   (let* ((ts (plist-get params :tstart))</span>
+<span class="c1">;;          (te (plist-get params :tend))</span>
+<span class="c1">;;          (start (time-to-seconds</span>
+<span class="c1">;;                  (apply &#39;encode-time (org-parse-time-string ts))))</span>
+<span class="c1">;;          (end (time-to-seconds</span>
+<span class="c1">;;                (apply &#39;encode-time (org-parse-time-string te))))</span>
+<span class="c1">;;          day-numbers)</span>
+<span class="c1">;;     (setq params (plist-put params :tstart nil))</span>
+<span class="c1">;;     (setq params (plist-put params :end nil))</span>
+<span class="c1">;;     (while (&lt;= start end)</span>
+<span class="c1">;;       (save-excursion</span>
+<span class="c1">;;         (insert &quot;\n\n&quot;</span>
+<span class="c1">;;                 (format-time-string (car org-time-stamp-formats)</span>
+<span class="c1">;;                                     (seconds-to-time start))</span>
+<span class="c1">;;                 &quot;----------------\n&quot;)</span>
+<span class="c1">;;         (org-dblock-write:clocktable</span>
+<span class="c1">;;          (plist-put</span>
+<span class="c1">;;           (plist-put</span>
+<span class="c1">;;            params</span>
+<span class="c1">;;            :tstart</span>
+<span class="c1">;;            (format-time-string (car org-time-stamp-formats)</span>
+<span class="c1">;;                                (seconds-to-time start)))</span>
+<span class="c1">;;           :tend</span>
+<span class="c1">;;           (format-time-string (car org-time-stamp-formats)</span>
+<span class="c1">;;                               (seconds-to-time end))))</span>
+<span class="c1">;;         (setq start (+ 86400 start))))))</span>
+</code></pre></div>
+
+<h2 id="emamux">Emamux</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;load-path</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/emamux&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">autoload</span> <span class="ss">&#39;emamux</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/emamux&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nb">use-package</span> <span class="nv">emamux</span><span class="p">)</span>
+<span class="c1">;;(load &quot;~/.emacs.d/elpa/emamux-20160602.653/emamux.el&quot;)</span>
+</code></pre></div>
+
+<p><a id="org47f84b1"></a></p>
+
+<h2 id="load-tabbar-and-add-it">Load tabbar and add it.</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="o">&#39;</span><span class="p">(</span><span class="nb">load</span> <span class="s">&quot;~/.emacs.d/elpa/tabbar-20141109.143/tabbar.el&quot;</span><span class="p">)</span>
+<span class="o">&#39;</span><span class="p">(</span><span class="nv">tabbar-mode</span> <span class="no">t</span> <span class="no">nil</span> <span class="p">(</span><span class="nv">tabbar</span><span class="p">))</span>
+</code></pre></div>
+
+<h2 id="starter-kit-autoloads-like-it-should-be-minus-that-bit-about-menubar">Starter kit autoloads, like it should be. (minus that bit about menubar)</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="k">setq</span> <span class="nv">smex-save-file</span> <span class="p">(</span><span class="nv">concat</span> <span class="nv">user-emacs-directory</span> <span class="s">&quot;.smex-items&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">smex-initialize</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;M-x&quot;</span><span class="p">)</span> <span class="ss">&#39;smex</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="various-functions-and-hooks-from-starter-kit-misc-el">Various Functions and hooks from starter-kit-misc.el</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">when</span> <span class="nv">window-system</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">frame-title-format</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">buffer-file-name</span> <span class="s">&quot;%f&quot;</span> <span class="p">(</span><span class="s">&quot;%b&quot;</span><span class="p">)))</span>
+  <span class="p">(</span><span class="nv">tooltip-mode</span> <span class="mi">-1</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">mouse-wheel-mode</span> <span class="no">t</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">blink-cursor-mode</span> <span class="mi">-1</span><span class="p">))</span>
+
+<span class="c1">;; can&#39;t do it at launch or emacsclient won&#39;t always honor it</span>
+<span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;before-make-frame-hook</span> <span class="ss">&#39;esk-turn-off-tool-bar</span><span class="p">)</span>
+
+<span class="p">(</span><span class="k">setq</span> <span class="nv">visible-bell</span> <span class="no">t</span>
+      <span class="nv">inhibit-startup-message</span> <span class="no">t</span>
+      <span class="nv">color-theme-is-global</span> <span class="no">t</span>
+      <span class="nv">sentence-end-double-space</span> <span class="no">nil</span>
+      <span class="nv">shift-select-mode</span> <span class="no">nil</span>
+      <span class="nv">mouse-yank-at-point</span> <span class="no">t</span>
+      <span class="nv">uniquify-buffer-name-style</span> <span class="ss">&#39;forward</span>
+      <span class="nv">whitespace-style</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">face</span> <span class="nv">trailing</span> <span class="nv">lines-tail</span> <span class="nv">tabs</span><span class="p">)</span>
+      <span class="nv">whitespace-line-column</span> <span class="mi">80</span>
+      <span class="nv">ediff-window-setup-function</span> <span class="ss">&#39;ediff-setup-windows-plain</span>
+      <span class="nv">oddmuse-directory</span> <span class="s">&quot;~/.emacs.d/oddmuse&quot;</span>
+      <span class="nv">save-place-file</span> <span class="s">&quot;~/.emacs.d/places&quot;</span>
+      <span class="nv">backup-directory-alist</span> <span class="o">`</span><span class="p">((</span><span class="s">&quot;.&quot;</span> <span class="o">.</span> <span class="o">,</span><span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/backups&quot;</span><span class="p">)))</span>
+      <span class="nv">diff-switches</span> <span class="s">&quot;-u&quot;</span><span class="p">)</span>
+
+<span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;safe-local-variable-values</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">lexical-binding</span> <span class="o">.</span> <span class="no">t</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;safe-local-variable-values</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">whitespace-line-column</span> <span class="o">.</span> <span class="mi">80</span><span class="p">))</span>
+
+<span class="c1">;; Highlight matching parentheses when the point is on them.</span>
+<span class="p">(</span><span class="nv">show-paren-mode</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1">;; ido-mode is like magic pixie dust!</span>
+<span class="p">(</span><span class="nv">ido-mode</span> <span class="no">t</span><span class="p">)</span>
+<span class="c1">;(ido-ubiquitous-mode t)</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">ido-enable-prefix</span> <span class="no">nil</span>
+      <span class="nv">ido-enable-flex-matching</span> <span class="no">t</span>
+      <span class="nv">ido-auto-merge-work-directories-length</span> <span class="no">nil</span>
+      <span class="nv">ido-create-new-buffer</span> <span class="ss">&#39;always</span>
+      <span class="nv">ido-use-filename-at-point</span> <span class="ss">&#39;guessx</span>
+      <span class="nv">ido-use-virtual-buffers</span> <span class="no">t</span>
+      <span class="nv">ido-handle-duplicate-virtual-buffers</span> <span class="mi">2</span>
+      <span class="nv">ido-max-prospects</span> <span class="mi">10</span><span class="p">)</span>
+
+<span class="p">(</span><span class="nv">set-default</span> <span class="ss">&#39;indent-tabs-mode</span> <span class="no">nil</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">set-default</span> <span class="ss">&#39;indicate-empty-lines</span> <span class="no">t</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">set-default</span> <span class="ss">&#39;imenu-auto-rescan</span> <span class="no">t</span><span class="p">)</span>
+
+<span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;text-mode-hook</span> <span class="ss">&#39;turn-on-auto-fill</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;text-mode-hook</span> <span class="ss">&#39;turn-on-flyspell</span><span class="p">)</span>
+
+<span class="p">(</span><span class="nv">defalias</span> <span class="ss">&#39;yes-or-no-p</span> <span class="ss">&#39;y-or-n-p</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">defalias</span> <span class="ss">&#39;auto-tail-revert-mode</span> <span class="ss">&#39;tail-mode</span><span class="p">)</span>
+
+<span class="p">(</span><span class="nb">random</span> <span class="no">t</span><span class="p">)</span> <span class="c1">;; Seed the random-number generator</span>
+
+<span class="c1">;; Hippie expand: at times perhaps too hip</span>
+<span class="p">(</span><span class="nb">dolist</span> <span class="p">(</span><span class="nv">f</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">try-expand-line</span> <span class="nv">try-expand-list</span> <span class="nv">try-complete-file-name-partially</span><span class="p">))</span>
+  <span class="p">(</span><span class="nb">delete</span> <span class="nv">f</span> <span class="nv">hippie-expand-try-functions-list</span><span class="p">))</span>
+
+<span class="c1">;; Add this back in at the end of the list.</span>
+<span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;hippie-expand-try-functions-list</span> <span class="ss">&#39;try-complete-file-name-partially</span> <span class="no">t</span><span class="p">)</span>
+
+<span class="p">(</span><span class="nv">eval-after-load</span> <span class="ss">&#39;grep</span>
+  <span class="o">&#39;</span><span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">boundp</span> <span class="ss">&#39;grep-find-ignored-files</span><span class="p">)</span>
+     <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;grep-find-ignored-files</span> <span class="s">&quot;*.class&quot;</span><span class="p">)))</span>
+
+<span class="c1">;; Cosmetics</span>
+
+<span class="p">(</span><span class="nv">eval-after-load</span> <span class="ss">&#39;diff-mode</span>
+  <span class="o">&#39;</span><span class="p">(</span><span class="k">progn</span>
+     <span class="p">(</span><span class="nv">set-face-foreground</span> <span class="ss">&#39;diff-added</span> <span class="s">&quot;green4&quot;</span><span class="p">)</span>
+     <span class="p">(</span><span class="nv">set-face-foreground</span> <span class="ss">&#39;diff-removed</span> <span class="s">&quot;red3&quot;</span><span class="p">)))</span>
+<span class="c1">;; Get around the emacswiki spam protection</span>
+<span class="p">(</span><span class="nv">eval-after-load</span> <span class="ss">&#39;oddmuse</span>
+  <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;oddmuse-mode-hook</span>
+            <span class="p">(</span><span class="k">lambda</span> <span class="p">()</span>
+              <span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nv">string-match</span> <span class="s">&quot;question&quot;</span> <span class="nv">oddmuse-post</span><span class="p">)</span>
+                <span class="p">(</span><span class="k">setq</span> <span class="nv">oddmuse-post</span> <span class="p">(</span><span class="nv">concat</span> <span class="s">&quot;uihnscuskc=1;&quot;</span> <span class="nv">oddmuse-post</span><span class="p">))))))</span>
+</code></pre></div>
+
+<h2 id="more-customizations-for-starter-kit">More Customizations for starter kit</h2>
+
+<ul>
+<li>from starter-kit-defuns</li>
+</ul>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">defun</span> <span class="nv">esk-local-column-number-mode</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nv">make-local-variable</span> <span class="ss">&#39;column-number-mode</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">column-number-mode</span> <span class="no">t</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">esk-local-comment-auto-fill</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nb">set</span> <span class="p">(</span><span class="nv">make-local-variable</span> <span class="ss">&#39;comment-auto-fill-only-comments</span><span class="p">)</span> <span class="no">t</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">auto-fill-mode</span> <span class="no">t</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">esk-turn-on-hl-line-mode</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">&gt;</span> <span class="p">(</span><span class="nv">display-color-cells</span><span class="p">)</span> <span class="mi">8</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">hl-line-mode</span> <span class="no">t</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">esk-turn-on-save-place-mode</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;saveplace</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">save-place</span> <span class="no">t</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">esk-turn-on-whitespace</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nv">whitespace-mode</span> <span class="no">t</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">esk-turn-on-paredit</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nv">paredit-mode</span> <span class="no">t</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">esk-turn-on-idle-highlight-mode</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nv">idle-highlight-mode</span> <span class="no">t</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">esk-pretty-lambdas</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nv">font-lock-add-keywords</span>
+   <span class="no">nil</span> <span class="o">`</span><span class="p">((</span><span class="s">&quot;(?\\(lambda\\&gt;\\)&quot;</span>
+          <span class="p">(</span><span class="mi">0</span> <span class="p">(</span><span class="k">progn</span> <span class="p">(</span><span class="nv">compose-region</span> <span class="p">(</span><span class="nv">match-beginning</span> <span class="mi">1</span><span class="p">)</span> <span class="p">(</span><span class="nv">match-end</span> <span class="mi">1</span><span class="p">)</span>
+                                    <span class="o">,</span><span class="p">(</span><span class="nv">make-char</span> <span class="ss">&#39;greek-iso8859-7</span> <span class="mi">107</span><span class="p">))</span>
+                    <span class="no">nil</span><span class="p">))))))</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">esk-add-watchwords</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nv">font-lock-add-keywords</span>
+   <span class="no">nil</span> <span class="o">&#39;</span><span class="p">((</span><span class="s">&quot;\\&lt;\\(FIX\\|TODO\\|FIXME\\|HACK\\|REFACTOR\\|NOCOMMIT\\)&quot;</span>
+          <span class="mi">1</span> <span class="nv">font-lock-warning-face</span> <span class="no">t</span><span class="p">))))</span>
+
+<span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;prog-mode-hook</span> <span class="ss">&#39;esk-local-column-number-mode</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;prog-mode-hook</span> <span class="ss">&#39;esk-local-comment-auto-fill</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;prog-mode-hook</span> <span class="ss">&#39;esk-turn-on-hl-line-mode</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;prog-mode-hook</span> <span class="ss">&#39;esk-turn-on-save-place-mode</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;prog-mode-hook</span> <span class="ss">&#39;esk-pretty-lambdas</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;prog-mode-hook</span> <span class="ss">&#39;esk-add-watchwords</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;prog-mode-hook</span> <span class="ss">&#39;esk-turn-on-idle-highlight-mode</span><span class="p">)</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">esk-prog-mode-hook</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nv">run-hooks</span> <span class="ss">&#39;prog-mode-hook</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">esk-turn-off-tool-bar</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nv">tool-bar-mode</span> <span class="mi">-1</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">esk-untabify-buffer</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">untabify</span> <span class="p">(</span><span class="nv">point-min</span><span class="p">)</span> <span class="p">(</span><span class="nv">point-max</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">esk-indent-buffer</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">indent-region</span> <span class="p">(</span><span class="nv">point-min</span><span class="p">)</span> <span class="p">(</span><span class="nv">point-max</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">esk-cleanup-buffer</span> <span class="p">()</span>
+  <span class="s">&quot;Perform a bunch of operations on the whitespace content of a buffer.&quot;</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">esk-indent-buffer</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">esk-untabify-buffer</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">delete-trailing-whitespace</span><span class="p">))</span>
+
+<span class="c1">;; Commands</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">esk-eval-and-replace</span> <span class="p">()</span>
+  <span class="s">&quot;Replace the preceding sexp with its value.&quot;</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">backward-kill-sexp</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">condition-case</span> <span class="no">nil</span>
+      <span class="p">(</span><span class="nb">prin1</span> <span class="p">(</span><span class="nb">eval</span> <span class="p">(</span><span class="nb">read</span> <span class="p">(</span><span class="nv">current-kill</span> <span class="mi">0</span><span class="p">)))</span>
+             <span class="p">(</span><span class="nv">current-buffer</span><span class="p">))</span>
+    <span class="p">(</span><span class="nb">error</span> <span class="p">(</span><span class="nv">message</span> <span class="s">&quot;Invalid expression&quot;</span><span class="p">)</span>
+           <span class="p">(</span><span class="nv">insert</span> <span class="p">(</span><span class="nv">current-kill</span> <span class="mi">0</span><span class="p">)))))</span>
+
+ <span class="p">(</span><span class="nb">defun</span> <span class="nv">esk-sudo-edit</span> <span class="p">(</span><span class="k">&amp;optional</span> <span class="nv">arg</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">interactive</span> <span class="s">&quot;p&quot;</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">or</span> <span class="nv">arg</span> <span class="p">(</span><span class="nb">not</span> <span class="nv">buffer-file-name</span><span class="p">))</span>
+      <span class="p">(</span><span class="nv">find-file</span> <span class="p">(</span><span class="nv">concat</span> <span class="s">&quot;/sudo:root@localhost:&quot;</span> <span class="p">(</span><span class="nv">ido-read-file-name</span> <span class="s">&quot;File: &quot;</span><span class="p">)))</span>
+    <span class="p">(</span><span class="nv">find-alternate-file</span> <span class="p">(</span><span class="nv">concat</span> <span class="s">&quot;/sudo:root@localhost:&quot;</span> <span class="nv">buffer-file-name</span><span class="p">))))</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">esk-lorem</span> <span class="p">()</span>
+  <span class="s">&quot;Insert a lorem ipsum.&quot;</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">insert</span> <span class="s">&quot;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do &quot;</span>
+          <span class="s">&quot;eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim&quot;</span>
+          <span class="s">&quot;ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut &quot;</span>
+          <span class="s">&quot;aliquip ex ea commodo consequat. Duis aute irure dolor in &quot;</span>
+          <span class="s">&quot;reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla &quot;</span>
+          <span class="s">&quot;pariatur. Excepteur sint occaecat cupidatat non proident, sunt in &quot;</span>
+          <span class="s">&quot;culpa qui officia deserunt mollit anim id est laborum.&quot;</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">esk-suck-it</span> <span class="p">(</span><span class="nv">suckee</span><span class="p">)</span>
+  <span class="s">&quot;Insert a comment of appropriate length about what can suck it.&quot;</span>
+  <span class="p">(</span><span class="nv">interactive</span> <span class="s">&quot;MWhat can suck it? &quot;</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">prefix</span> <span class="p">(</span><span class="nv">concat</span> <span class="s">&quot;;; &quot;</span> <span class="nv">suckee</span> <span class="s">&quot; can s&quot;</span><span class="p">))</span>
+        <span class="p">(</span><span class="nv">postfix</span> <span class="s">&quot;ck it!&quot;</span><span class="p">)</span>
+        <span class="p">(</span><span class="nv">col</span> <span class="p">(</span><span class="nv">current-column</span><span class="p">)))</span>
+    <span class="p">(</span><span class="nv">insert</span> <span class="nv">prefix</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">dotimes</span> <span class="p">(</span><span class="nv">_</span> <span class="p">(</span><span class="nb">-</span> <span class="mi">80</span> <span class="nv">col</span> <span class="p">(</span><span class="nb">length</span> <span class="nv">prefix</span><span class="p">)</span> <span class="p">(</span><span class="nb">length</span> <span class="nv">postfix</span><span class="p">)))</span> <span class="p">(</span><span class="nv">insert</span> <span class="s">&quot;u&quot;</span><span class="p">))</span>
+    <span class="p">(</span><span class="nv">insert</span> <span class="nv">postfix</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">esk-insert-date</span> <span class="p">()</span>
+  <span class="s">&quot;Insert a time-stamp according to locale&#39;s date and time format.&quot;</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">insert</span> <span class="p">(</span><span class="nv">format-time-string</span> <span class="s">&quot;%c&quot;</span> <span class="p">(</span><span class="nv">current-time</span><span class="p">))))</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">esk-pairing-bot</span> <span class="p">()</span>
+  <span class="s">&quot;If you can&#39;t pair program with a human, use this instead.&quot;</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">message</span> <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">y-or-n-p</span> <span class="s">&quot;Do you have a test for that? &quot;</span><span class="p">)</span> <span class="s">&quot;Good.&quot;</span> <span class="s">&quot;Bad!&quot;</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">esk-paredit-nonlisp</span> <span class="p">()</span>
+  <span class="s">&quot;Turn on paredit mode for non-lisps.&quot;</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb">set</span> <span class="p">(</span><span class="nv">make-local-variable</span> <span class="ss">&#39;paredit-space-for-delimiter-predicates</span><span class="p">)</span>
+       <span class="o">&#39;</span><span class="p">((</span><span class="k">lambda</span> <span class="p">(</span><span class="nb">endp</span> <span class="nv">delimiter</span><span class="p">)</span> <span class="no">nil</span><span class="p">)))</span>
+  <span class="p">(</span><span class="nv">paredit-mode</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="c1">;; A monkeypatch to cause annotate to ignore whitespace</span>
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">vc-git-annotate-command</span> <span class="p">(</span><span class="nv">file</span> <span class="nv">buf</span> <span class="k">&amp;optional</span> <span class="nv">rev</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">name</span> <span class="p">(</span><span class="nv">file-relative-name</span> <span class="nv">file</span><span class="p">)))</span>
+    <span class="p">(</span><span class="nv">vc-git-command</span> <span class="nv">buf</span> <span class="mi">0</span> <span class="nv">name</span> <span class="s">&quot;blame&quot;</span> <span class="s">&quot;-w&quot;</span> <span class="nv">rev</span><span class="p">)))</span>
+</code></pre></div>
+
+<h2 id="org-themis-mode-on">org themis mode on</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="o">&#39;</span><span class="p">(</span><span class="nv">org-themis-mode</span> <span class="no">t</span><span class="p">)</span>
+</code></pre></div>
+
+<ul>
+<li>A project manager for ORG</li>
+</ul>
+
+<h2 id="midnight-mode">Midnight Mode</h2>
+
+<ul>
+<li>Kill my buffers for me please</li>
+</ul>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="c1">;; ;;; midnight mode</span>
+
+<span class="c1">;; (require &#39;midnight)</span>
+
+<span class="c1">;; ;;kill buffers if they were last disabled more than this seconds ago</span>
+<span class="c1">;; (setq clean-buffer-list-delay-special 900)</span>
+
+<span class="c1">;; (defvar clean-buffer-list-timer nil</span>
+<span class="c1">;;   &quot;Stores clean-buffer-list timer if there is one. You can disable clean-buffer-list by (cancel-timer clean-buffer-list-timer).&quot;)</span>
+
+<span class="c1">;; ;; run clean-buffer-list every 2 hours</span>
+<span class="c1">;; (setq clean-buffer-list-timer (run-at-time t 7200 &#39;clean-buffer-list))</span>
+
+<span class="c1">;; ;; kill everything, clean-buffer-list is very intelligent at not killing</span>
+<span class="c1">;; ;; unsaved buffer.</span>
+<span class="c1">;; (setq clean-buffer-list-kill-regexps &#39;(&quot;^.*$&quot;))</span>
+
+<span class="c1">;; ;; keep these buffer untouched</span>
+<span class="c1">;; ;; prevent append multiple times</span>
+<span class="c1">;; (defvar clean-buffer-list-kill-never-buffer-names-init</span>
+<span class="c1">;;   clean-buffer-list-kill-never-buffer-names</span>
+<span class="c1">;;   &quot;Init value for clean-buffer-list-kill-never-buffer-names&quot;)</span>
+<span class="c1">;; (setq clean-buffer-list-kill-never-buffer-names</span>
+<span class="c1">;;       (append</span>
+<span class="c1">;;        &#39;(&quot;*Messages*&quot; &quot;*cmd*&quot; &quot;*scratch*&quot; &quot;*w3m*&quot; &quot;*w3m-cache*&quot; &quot;*Inferior Octave*&quot;)</span>
+<span class="c1">;;        clean-buffer-list-kill-never-buffer-names-init))</span>
+
+<span class="c1">;; ;; prevent append multiple times</span>
+<span class="c1">;; (defvar clean-buffer-list-kill-never-regexps-init</span>
+<span class="c1">;;   clean-buffer-list-kill-never-regexps</span>
+<span class="c1">;;   &quot;Init value for clean-buffer-list-kill-never-regexps&quot;)</span>
+<span class="c1">;; ;; append to *-init instead of itself</span>
+<span class="c1">;; (setq clean-buffer-list-kill-never-regexps</span>
+<span class="c1">;;       (append &#39;(&quot;^\\*EMMS Playlist\\*.*$&quot;)</span>
+<span class="c1">;; 	      clean-buffer-list-kill-never-regexps-init))</span>
+</code></pre></div>
+
+<h2 id="yasnippet-began-to-be-a-bitch-again-again">Yasnippet began to be a bitch again&amp;again</h2>
+
+<p>:DidNotWork:</p>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="o">&#39;</span><span class="p">(</span><span class="nv">tabbar-mode</span> <span class="no">t</span> <span class="no">nil</span> <span class="p">(</span><span class="nv">tabbar</span><span class="p">))</span>
+<span class="o">&#39;</span><span class="p">(</span><span class="nv">start-menu-mode</span> <span class="no">t</span> <span class="no">nil</span> <span class="p">(</span><span class="nv">start-menu</span><span class="p">))</span>
+<span class="o">&#39;</span><span class="p">(</span><span class="nv">wrap-region-global-mode</span> <span class="no">t</span> <span class="no">nil</span> <span class="p">(</span><span class="nv">wrap-region</span><span class="p">))</span>
+<span class="o">&#39;</span><span class="p">(</span><span class="nv">yalinum-delay</span> <span class="no">t</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;load-path</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/yasnippet&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">autoload</span> <span class="ss">&#39;yasnippet</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/yasnippet&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nb">use-package</span> <span class="nv">yasnippet</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">yas-global-mode</span> <span class="no">t</span><span class="p">)</span><span class="c1">; (yasnippet))</span>
+</code></pre></div>
+
+<h2 id="45-use-helm-to-select-snippets">45 Use helm to select snippets</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">defun</span> <span class="nv">shk-yas/helm-prompt</span> <span class="p">(</span><span class="nv">prompt</span> <span class="nv">choices</span> <span class="k">&amp;optional</span> <span class="nv">display-fn</span><span class="p">)</span>
+    <span class="s">&quot;Use helm to select a snippet. Put this into `yas-prompt-functions.&#39;&quot;</span>
+    <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">setq</span> <span class="nv">display-fn</span> <span class="p">(</span><span class="nb">or</span> <span class="nv">display-fn</span> <span class="ss">&#39;identity</span><span class="p">))</span>
+    <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;helm-config</span><span class="p">)</span>
+        <span class="p">(</span><span class="k">let</span> <span class="p">(</span><span class="nv">tmpsource</span> <span class="nv">cands</span> <span class="nv">result</span> <span class="nv">rmap</span><span class="p">)</span>
+          <span class="p">(</span><span class="k">setq</span> <span class="nv">cands</span> <span class="p">(</span><span class="nb">mapcar</span> <span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="nv">x</span><span class="p">)</span> <span class="p">(</span><span class="nb">funcall</span> <span class="nv">display-fn</span> <span class="nv">x</span><span class="p">))</span> <span class="nv">choices</span><span class="p">))</span>
+          <span class="p">(</span><span class="k">setq</span> <span class="nv">rmap</span> <span class="p">(</span><span class="nb">mapcar</span> <span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="nv">x</span><span class="p">)</span> <span class="p">(</span><span class="nb">cons</span> <span class="p">(</span><span class="nb">funcall</span> <span class="nv">display-fn</span> <span class="nv">x</span><span class="p">)</span> <span class="nv">x</span><span class="p">))</span> <span class="nv">choices</span><span class="p">))</span>
+          <span class="p">(</span><span class="k">setq</span> <span class="nv">tmpsource</span>
+                <span class="p">(</span><span class="nb">list</span>
+                 <span class="p">(</span><span class="nb">cons</span> <span class="ss">&#39;name</span> <span class="nv">prompt</span><span class="p">)</span>
+                 <span class="p">(</span><span class="nb">cons</span> <span class="ss">&#39;candidates</span> <span class="nv">cands</span><span class="p">)</span>
+                 <span class="o">&#39;</span><span class="p">(</span><span class="nv">action</span> <span class="o">.</span> <span class="p">((</span><span class="s">&quot;Expand&quot;</span> <span class="o">.</span> <span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="nv">selection</span><span class="p">)</span> <span class="nv">selection</span><span class="p">))))</span>
+                 <span class="p">))</span>
+          <span class="p">(</span><span class="k">setq</span> <span class="nv">result</span> <span class="p">(</span><span class="nv">helm-other-buffer</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">tmpsource</span><span class="p">)</span> <span class="s">&quot;*helm-select-yasnippet&quot;</span><span class="p">))</span>
+          <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">null</span> <span class="nv">result</span><span class="p">)</span>
+              <span class="p">(</span><span class="nb">signal</span> <span class="ss">&#39;quit</span> <span class="s">&quot;user quit!&quot;</span><span class="p">)</span>
+            <span class="p">(</span><span class="nb">cdr</span> <span class="p">(</span><span class="nb">assoc</span> <span class="nv">result</span> <span class="nv">rmap</span><span class="p">))))</span>
+      <span class="no">nil</span><span class="p">))</span>
+</code></pre></div>
+
+<h2 id="46-ido-completing-yasnippet">46 ido-completing yasnippet</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="c1">;; Completing point by some yasnippet key</span>
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">yas-ido-expand</span> <span class="p">()</span>
+  <span class="s">&quot;Lets you select (and expand) a yasnippet key&quot;</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">original-point</span> <span class="p">(</span><span class="nv">point</span><span class="p">)))</span>
+      <span class="p">(</span><span class="nv">while</span> <span class="p">(</span><span class="nb">and</span>
+              <span class="p">(</span><span class="nb">not</span> <span class="p">(</span><span class="nb">=</span> <span class="p">(</span><span class="nv">point</span><span class="p">)</span> <span class="p">(</span><span class="nv">point-min</span><span class="p">)</span> <span class="p">))</span>
+              <span class="p">(</span><span class="nb">not</span>
+               <span class="p">(</span><span class="nv">string-match</span> <span class="s">&quot;[[:space:]\n]&quot;</span> <span class="p">(</span><span class="nv">char-to-string</span> <span class="p">(</span><span class="nv">char-before</span><span class="p">)))))</span>
+        <span class="p">(</span><span class="nv">backward-word</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="p">(</span><span class="k">let*</span> <span class="p">((</span><span class="nv">init-word</span> <span class="p">(</span><span class="nv">point</span><span class="p">))</span>
+           <span class="p">(</span><span class="nv">word</span> <span class="p">(</span><span class="nv">buffer-substring</span> <span class="nv">init-word</span> <span class="nv">original-point</span><span class="p">))</span>
+           <span class="p">(</span><span class="nb">list</span> <span class="p">(</span><span class="nv">yas-active-keys</span><span class="p">)))</span>
+      <span class="p">(</span><span class="nv">goto-char</span> <span class="nv">original-point</span><span class="p">)</span>
+      <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">key</span> <span class="p">(</span><span class="nb">remove-if-not</span>
+                  <span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="nv">s</span><span class="p">)</span> <span class="p">(</span><span class="nv">string-match</span> <span class="p">(</span><span class="nv">concat</span> <span class="s">&quot;^&quot;</span> <span class="nv">word</span><span class="p">)</span> <span class="nv">s</span><span class="p">))</span> <span class="nb">list</span><span class="p">)))</span>
+        <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">=</span> <span class="p">(</span><span class="nb">length</span> <span class="nv">key</span><span class="p">)</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="p">(</span><span class="k">setq</span> <span class="nv">key</span> <span class="p">(</span><span class="nb">pop</span> <span class="nv">key</span><span class="p">))</span>
+          <span class="p">(</span><span class="k">setq</span> <span class="nv">key</span> <span class="p">(</span><span class="nv">ido-completing-read</span> <span class="s">&quot;key: &quot;</span> <span class="nb">list</span> <span class="no">nil</span> <span class="no">nil</span> <span class="nv">word</span><span class="p">)))</span>
+        <span class="p">(</span><span class="nv">delete-char</span> <span class="p">(</span><span class="nb">-</span> <span class="nv">init-word</span> <span class="nv">original-point</span><span class="p">))</span>
+        <span class="p">(</span><span class="nv">insert</span> <span class="nv">key</span><span class="p">)</span>
+        <span class="p">(</span><span class="nv">yas-expand</span><span class="p">)))))</span>
+</code></pre></div>
+
+<h2 id="47-taskjuggler-mode">47 TaskJuggler Mode</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;load-path</span> <span class="s">&quot;~/.emacs.d/taskjuggler-mode&quot;</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">autoload</span> <span class="ss">&#39;taskjuggler</span> <span class="s">&quot;~/.emacs.d/taskjuggler-mode&quot;</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">use-package</span> <span class="nv">taskjuggler</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">load</span> <span class="s">&quot;~/.emacs.d/taskjuggler-mode/taskjuggler-mode.el&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="48-google-weather">48 Google Weather</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;load-path</span> <span class="s">&quot;~/.emacs.d/org-contrib/google-weather&quot;</span><span class="p">)</span>
+<span class="c1">;(autoload &#39;google-weather &quot;~/.emacs.d/org-contrib/google-weather/google-weather.el&quot;)</span>
+<span class="c1">;(load &#39;google-weather &quot;~/.emacs.d/org-contrib/google-weather/google-weather.el&quot;)</span>
+<span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;org-google-weather</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="49-load-graphene">49 load graphene</h2>
+
+<ul>
+<li><p>FIXME- = Graphene Theme now fails to load, in multitudes of different ways.</p>
+
+<ul>
+<li><p>Also might be the cause of many of the errors I am recieving.</p></li>
+
+<li><p>It seems that by loading graphene, it kicks out some of my packages.</p></li>
+</ul></li>
+</ul>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp">    <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;load-path</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/graphene&quot;</span><span class="p">))</span>
+    <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;load-path</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/graphene-meta-theme&quot;</span><span class="p">))</span>
+    <span class="p">(</span><span class="nv">autoload</span> <span class="ss">&#39;graphene</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/graphene&quot;</span><span class="p">))</span>
+    <span class="p">(</span><span class="nv">autoload</span> <span class="ss">&#39;graphene-meta-theme</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/graphene-meta-theme&quot;</span><span class="p">))</span>
+    <span class="p">(</span><span class="nb">use-package</span> <span class="nv">graphene</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">use-package</span> <span class="nv">graphene-meta-theme</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">load</span> <span class="s">&quot;~/.emacs.d/elpa/graphene-20161120.938/graphene.el&quot;</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">load</span> <span class="s">&quot;~/.emacs.d/elpa/graphene-meta-theme-20161204.807/graphene-meta-theme.el&quot;</span><span class="p">)</span>
+    <span class="c1">;;(package graphene)</span>
+    <span class="c1">;;(package graphene-meta-theme)</span>
+    <span class="c1">;;(require &#39;graphene)</span>
+    <span class="c1">;;(require &#39;graphene-meta-theme)</span>
+</code></pre></div>
+
+<h2 id="fix-package-manager-load-errors">Fix package manager load errors</h2>
+
+<ul>
+<li>TODO Fix package-desc-version error</li>
+</ul>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp">    <span class="c1">;;  (add-to-list &#39;load-path (expand-file-name &quot;~/.emacs.d/elpa/el-get&quot;))</span>
+    <span class="c1">;;  (require &#39;el-get&#39;)</span>
+    
+      <span class="c1">;; (unless (require &#39;el-get nil &#39;noerror)</span>
+      <span class="c1">;;    (with-current-buffer</span>
+      <span class="c1">;;       (url-retrieve-synchronously</span>
+      <span class="c1">;;        &quot;https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el&quot;)</span>
+      <span class="c1">;;     (goto-char (point-max))</span>
+      <span class="c1">;;     (eval-print-last-sexp)))</span>
+    
+      <span class="c1">;; (add-to-list &#39;el-get-recipe-path &quot;~/.emacs.d/el-get-user/recipes&quot;)</span>
+      <span class="c1">;; (el-get &#39;sync)</span>
+</code></pre></div>
+
+<h2 id="51-load-mew">51 Load Mew</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">mew</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">autoload</span> <span class="ss">&#39;mew</span> <span class="s">&quot;mew&quot;</span> <span class="no">nil</span> <span class="no">t</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">autoload</span> <span class="ss">&#39;mew-send</span> <span class="s">&quot;mew&quot;</span> <span class="no">nil</span> <span class="no">t</span><span class="p">)</span>
+
+<span class="c1">;; Optional setup (Read Mail menu):</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">read-mail-command</span> <span class="ss">&#39;mew</span><span class="p">)</span>
+
+<span class="c1">;; Optional setup (e.g. C-xm for sending a message):</span>
+<span class="p">(</span><span class="nv">autoload</span> <span class="ss">&#39;mew-user-agent-compose</span> <span class="s">&quot;mew&quot;</span> <span class="no">nil</span> <span class="no">t</span><span class="p">)</span>
+<span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">boundp</span> <span class="ss">&#39;mail-user-agent</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">setq</span> <span class="nv">mail-user-agent</span> <span class="ss">&#39;mew-user-agent</span><span class="p">))</span>
+<span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">fboundp</span> <span class="ss">&#39;define-mail-user-agent</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">define-mail-user-agent</span>
+      <span class="ss">&#39;mew-user-agent</span>
+      <span class="ss">&#39;mew-user-agent-compose</span>
+      <span class="ss">&#39;mew-draft-send-message</span>
+      <span class="ss">&#39;mew-draft-kill</span>
+      <span class="ss">&#39;mew-send-hook</span><span class="p">))</span>
+</code></pre></div>
+
+<ul>
+<li>Mew Loading according to MAN</li>
+</ul>
+
+<h2 id="52-configure-email-address-for-mew">52 Configure-email address for mew</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="c1">;; (setq mew-name &quot;your name&quot;) ;; (user-full-name)</span>
+<span class="c1">;; (setq mew-user &quot;user name of e-mail address&quot;) ;; (user-login-name)</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">mew-mail-domain</span> <span class="s">&quot;localhost&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="53-mew-use-smtp">53 Mew use smtp</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="k">setq</span> <span class="nv">mew-smtp-server</span> <span class="s">&quot;localhost&quot;</span><span class="p">)</span>  <span class="c1">;; if not localhost</span>
+</code></pre></div>
+
+<h2 id="54-not-setting-up-pop">54 Not setting up pop</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="k">setq</span> <span class="nv">mew-pop-user</span> <span class="s">&quot;example@example.org&quot;</span><span class="p">)</span>  <span class="c1">;; (user-login-name)</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">mew-pop-server</span> <span class="s">&quot;pop.gmail.com&quot;</span><span class="p">)</span>    <span class="c1">;; if not localhost</span>
+</code></pre></div>
+
+<h2 id="55-mew-setup-mailboxes">55 Mew Setup Mailboxes</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="c1">;; To use local mailbox &quot;mbox&quot; or &quot;maildir&quot; instead of POP</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">mew-mailbox-type</span> <span class="ss">&#39;maildir</span><span class="p">)</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">mew-mbox-command</span> <span class="s">&quot;incm&quot;</span><span class="p">)</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">mew-mbox-command-arg</span> <span class="s">&quot;-u -d /home/$USER/mail&quot;</span><span class="p">)</span>
+<span class="c1">;; If /path/to/mbox is a file, it means &quot;mbox&quot;.</span>
+<span class="c1">;; If /path/to/mbox is a directory, it means &quot;maildir&quot;.</span>
+</code></pre></div>
+
+<h2 id="56-mew-not-setting-up-imap">56 Mew not setting up imap</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="c1">;;(setq mew-proto &quot;%&quot;)</span>
+<span class="c1">;; (setq mew-imap-user &quot;your IMAP account&quot;)  ;; (user-login-name)</span>
+<span class="c1">;;(setq mew-imap-server &quot;your IMAP server&quot;)    ;; if not localhost</span>
+</code></pre></div>
+
+<h2 id="57-mew-setup-nntp">57 Mew setup nntp</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="c1">;; (setq mew-nntp-user &quot;your NNTP account&quot;)</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">mew-nntp-server</span> <span class="s">&quot;usa.news.astraweb.com&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="58-setup-mew-to-use-a-cached-password">58 Setup Mew to use a cached password</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="k">setq</span> <span class="nv">mew-use-cached-passwd</span> <span class="no">t</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="org-caldav-settings">Org-CalDAV settings</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="k">setq</span> <span class="nv">org-caldav-calendar-id</span> <span class="s">&quot;REALLY_LONG_APPLICATION_ID$.apps.googleusercontent.com&quot;</span><span class="p">)</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">org-caldav-files</span> <span class="s">&quot;/PATH/TO/ORG/calendar.org&quot;</span><span class="p">)</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">org-caldav-inbox</span> <span class="s">&quot;/PATH/TO/ORG/calendar.org&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="icicles-load">Icicles Load</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;load-path</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/icicles&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">autoload</span> <span class="ss">&#39;icicles</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/icicles&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nb">use-package</span> <span class="nv">icicles</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;load-path</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/stripe-buffer&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">autoload</span> <span class="ss">&#39;stripe-buffer</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/stripe-buffer&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nb">use-package</span> <span class="nv">stripe-buffer</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;load-path</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/automargin&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">autoload</span> <span class="ss">&#39;automargin</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/automargin&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nb">use-package</span> <span class="nv">automargin</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="lastly-load-w3m-and-minimap-notrequired">Lastly Load w3m and minimap     :notrequired:</h2>
+
+<p>This is not loading correctly.</p>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;load-path</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/w3m&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">autoload</span> <span class="ss">&#39;w3m</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/w3m&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nb">use-package</span> <span class="nv">w3m</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;load-path</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/minimap&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">autoload</span> <span class="ss">&#39;minimap</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/minimap&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nb">use-package</span> <span class="nv">minimap</span><span class="p">)</span>
+</code></pre></div>
+
+<p><a id="orga8c1b2a"></a></p>
+
+<h2 id="set-default-font-broken">Set Default Font     :Broken:</h2>
+
+<ul>
+<li>Does not work.</li>
+</ul>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="c1">;; Should change the default font for new frames</span>
+ <span class="c1">;;(add-to-list &#39;default-frame-alist &#39;(font . &quot;Monospace-10&quot; ))</span>
+   <span class="c1">;;(set-face-attribute &#39;default t :font &quot;Monospace-10&quot; )</span>
+ <span class="c1">;; Should change the current frame and all others </span>
+   <span class="c1">;;(set-face-attribute &#39;default nil :font &quot;Monospace-10&quot; )</span>
+   <span class="c1">;;(set-frame-font &quot;Monospace-10&quot; nil t)</span>
+</code></pre></div>
+
+<h2 id="load-hyperbole">Load Hyperbole</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;load-path</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/hyperbole&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">autoload</span> <span class="ss">&#39;hyperbole</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/hyperbole&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nb">use-package</span> <span class="nv">hyperbole</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">load</span> <span class="s">&quot;~/.emacs.d/elpa/hyperbole-6.0.2/hyperbole.el&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="call-w3m-library-that-gets-hung">Call w3m library that gets hung.</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">load</span> <span class="s">&quot;~/.emacs.d/elpa/w3m-20161004.1350/w3m.el&quot;</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">load</span> <span class="s">&quot;~/.emacs.d/elpa/w3m-20161004.1350/w3m-cookie.el&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="load-ledger-and-tell-org-to-load-it-as-well">Load Ledger and tell org to load it as well</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;load-path</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/ledger-mode&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">autoload</span> <span class="ss">&#39;ledger-mode</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/ledger-mode&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nb">use-package</span> <span class="nv">ledger-mode</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;load-path</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/flycheck-ledger&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">autoload</span> <span class="ss">&#39;flycheck-ledger</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/flycheck-ledger&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nb">use-package</span> <span class="nv">flycheck-ledger</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">org-babel-do-load-languages</span>
+ <span class="ss">&#39;org-babel-load-languages</span>
+ <span class="o">&#39;</span><span class="p">((</span><span class="nv">ledger</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>         <span class="c1">;this is the important one for this tutorial</span>
+  <span class="p">))</span>
+</code></pre></div>
+
+<h2 id="load-telephone-line">Load telephone Line</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;load-path</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/telephone-line&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">autoload</span> <span class="ss">&#39;telephone-line</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/telephone-line&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nb">use-package</span> <span class="nv">telephone-line</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="for-org-password-manager">For Org Password Manager</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;org-mode-hook</span> <span class="ss">&#39;org-password-manager-key-bindings</span><span class="p">)</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">org-completion-use-ido</span> <span class="no">t</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="require-org-drill">Require ORG-DRILL</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;org-drill</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="customize-tab-completion">Customize Tab Completion</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">defun</span> <span class="nv">fancy-tab</span> <span class="p">(</span><span class="nv">arg</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">interactive</span> <span class="s">&quot;P&quot;</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">this-command</span> <span class="nv">last-command</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">or</span> <span class="p">(</span><span class="nb">eq</span> <span class="nv">this-command</span> <span class="ss">&#39;hippie-expand</span><span class="p">)</span> <span class="p">(</span><span class="nv">looking-at</span> <span class="s">&quot;\\_&gt;&quot;</span><span class="p">))</span>
+      <span class="p">(</span><span class="k">progn</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">this-command</span> <span class="ss">&#39;hippie-expand</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">hippie-expand</span> <span class="nv">arg</span><span class="p">))</span>
+    <span class="p">(</span><span class="k">setq</span> <span class="nv">this-command</span> <span class="ss">&#39;indent-for-tab-command</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">indent-for-tab-command</span> <span class="nv">arg</span><span class="p">)))</span>
+
+
+<span class="p">(</span><span class="nv">define-key</span> <span class="nv">read-expression-map</span> <span class="nv">[</span><span class="p">(</span><span class="nv">tab</span><span class="p">)</span><span class="nv">]</span> <span class="ss">&#39;hippie-expand</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;TAB&quot;</span><span class="p">)</span> <span class="ss">&#39;fancy-tab</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="load-tabkey2">Load TabKey2</h2>
+
+<p>SmartTab might work and then again it might work not. An alternative to that is tabkey2. We are going ahead and loading this file just in case.</p>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">load</span> <span class="s">&quot;~/.emacs.d/packages/tabkey2.el&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="org-webpage-loading">Org WebPage Loading</h2>
+
+<p>I seriously doubt that it will just magically configure org-webpage by adding the following lines of code. But it is what the manual says to do, so here goes nothing.</p>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;load-path</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/org-webpage&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">autoload</span> <span class="ss">&#39;org-webpage</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/org-webpage&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nb">use-package</span> <span class="nv">org-webpage</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;org-webpage</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="org-webpage-configuration">ORG-WebPage Configuration</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nv">owp/add-project-config</span>
+ <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;org.example.org&quot;</span>
+   <span class="ss">:repository-directory</span> <span class="s">&quot;/home/$USER/Sandbox/org-site&quot;</span>
+   <span class="c1">;;:remote (git &quot;https://github.com/tumashu/tumashu.github.com.git&quot; &quot;master&quot;)</span>
+   <span class="c1">;; you can use `rclone` with `:remote (rclone &quot;remote-name&quot; &quot;/remote/path/location&quot;)` instead.</span>
+   <span class="ss">:remote</span> <span class="p">(</span><span class="nv">rclone</span> <span class="s">&quot;Site-Files&quot;</span> <span class="s">&quot;home/$USER/Sandbox/org-site-src&quot;</span><span class="p">)</span>
+   <span class="ss">:site-domain</span> <span class="s">&quot;http://org.example.org&quot;</span>
+   <span class="ss">:site-main-title</span> <span class="s">&quot;Feeling feathered...&quot;</span>
+   <span class="ss">:site-sub-title</span> <span class="s">&quot;Written delusions of structure and abstract architecture&quot;</span>
+   <span class="ss">:theme</span> <span class="p">(</span><span class="nv">worg</span><span class="p">)</span>
+   <span class="c1">;;:source-browse-url (&quot;Github&quot; &quot;https://github.com/tumashu/tumashu.github.com&quot;)</span>
+   <span class="c1">;;:personal-avatar &quot;/media/img/horse.jpg&quot;</span>
+   <span class="c1">;;:personal-duoshuo-shortname &quot;tumashu-website&quot;</span>
+   <span class="ss">:web-server-port</span> <span class="mi">7654</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">owp/add-project-config</span>
+ <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;$USERNAME.github.com&quot;</span>
+   <span class="ss">:repository-directory</span> <span class="s">&quot;/home/$USER/Sandbox/org-github-site&quot;</span>
+   <span class="ss">:remote</span> <span class="p">(</span><span class="nv">git</span> <span class="s">&quot;https://github.com/$USERNAME/$USERNAME.github.com.git&quot;</span> <span class="s">&quot;master&quot;</span><span class="p">)</span>
+   <span class="c1">;; you can use `rclone` with `:remote (rclone &quot;remote-name&quot; &quot;/remote/path/location&quot;)` instead.</span>
+   <span class="c1">;;:remote (rclone &quot;Site-Files&quot; &quot;home/$USER/Sandbox/org-site-src&quot;)</span>
+   <span class="ss">:site-domain</span> <span class="s">&quot;http://$USERNAME.github.com&quot;</span>
+   <span class="ss">:site-main-title</span> <span class="s">&quot;Github Pages for $USERNAME&quot;</span>
+   <span class="ss">:site-sub-title</span> <span class="s">&quot;My github site&quot;</span>
+   <span class="ss">:theme</span> <span class="p">(</span><span class="nv">worg</span><span class="p">)</span>
+   <span class="ss">:source-browse-url</span> <span class="p">(</span><span class="s">&quot;Github&quot;</span> <span class="s">&quot;https://github.com/$USERNAME/$USERNAME.github.com&quot;</span><span class="p">)</span>
+   <span class="c1">;;:personal-avatar &quot;/media/img/horse.jpg&quot;</span>
+   <span class="c1">;;:personal-duoshuo-shortname &quot;tumashu-website&quot;</span>
+   <span class="ss">:web-server-port</span> <span class="mi">7654</span><span class="p">))</span>
+</code></pre></div>
+
+<h2 id="load-restart-emacs">Load restart emacs</h2>
+
+<p>For some reason restart-emacs no longer loads, or is kicked out.</p>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;load-path</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/restart-emacs&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">autoload</span> <span class="ss">&#39;restart-emacs</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.emacs.d/elpa/restart-emacs&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nb">use-package</span> <span class="nv">restart-emacs</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="set-the-default-font-for-emacs-broken">Set the default font for emacs     :Broken:</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="c1">;;(set-face-attribute &#39;default nil :font &quot;Monospace Regular-10&quot; )</span>
+<span class="c1">;;(set-frame-font &quot;Monospace Regular-9&quot; nil t)</span>
+<span class="c1">;;(set-default-font &quot;Monospace Regular-9&quot;)</span>
+</code></pre></div>
+
+<h2 id="setting-hugo-sites-directory">Setting hugo sites Directory</h2>
+
+<ul>
+<li><p>Erroneous Coding</p></li>
+
+<li><p>For Some reason unforseen, the developer chose to not allow you to set the variable for the website directory not within the customization menu, that would make sense and we cannot have any of that sort of thing here, we have to declare a custom variable. Because he forgot to code it in when he wrote the plugin.</p></li>
+</ul>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nv">custom-set-variables</span>
+ <span class="o">&#39;</span><span class="p">(</span><span class="nv">hugo-sites-dir</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/Sandbox/hugo-sites&quot;</span><span class="p">)))</span>
+</code></pre></div>
+
+<h2 id="adding-so-ses-can-read-csv">Adding so SES can read csv</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="c1">;; ses-csv.el -- Read/Write CSV file for SES</span>
+<span class="c1">;; Author: Takashi Hattori (hattori@sfc.keio.ac.jp)</span>
+<span class="c1">;; Requires: Ruby</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">ses-read-from-csv-file</span> <span class="p">(</span><span class="nv">file</span><span class="p">)</span>
+  <span class="s">&quot;Insert the contents of a CSV file named FILE into the current position.&quot;</span>
+  <span class="p">(</span><span class="nv">interactive</span> <span class="s">&quot;fCSV file: &quot;</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">buf</span> <span class="p">(</span><span class="nv">get-buffer-create</span> <span class="s">&quot;*ses-csv*&quot;</span><span class="p">))</span>
+  <span class="nv">text</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">save-excursion</span>
+      <span class="p">(</span><span class="nv">set-buffer</span> <span class="nv">buf</span><span class="p">)</span>
+      <span class="p">(</span><span class="nv">erase-buffer</span><span class="p">)</span>
+      <span class="p">(</span><span class="nv">process-file</span> <span class="s">&quot;ruby&quot;</span> <span class="nv">file</span> <span class="nv">buf</span> <span class="no">nil</span> <span class="s">&quot;-e&quot;</span> <span class="s">&quot;require &#39;csv&#39;; CSV::Reader.parse(STDIN) { |x| puts x.join(\&quot;\\t\&quot;) }&quot;</span><span class="p">)</span>
+      <span class="p">(</span><span class="k">setq</span> <span class="nv">text</span> <span class="p">(</span><span class="nv">buffer-substring</span> <span class="p">(</span><span class="nv">point-min</span><span class="p">)</span> <span class="p">(</span><span class="nv">point-max</span><span class="p">))))</span>
+    <span class="p">(</span><span class="nv">ses-yank-tsf</span> <span class="nv">text</span> <span class="no">nil</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">ses-write-to-csv-file</span> <span class="p">(</span><span class="nv">file</span><span class="p">)</span>
+  <span class="s">&quot;Write the values of the current buffer into a CSV file named FILE.&quot;</span>
+  <span class="p">(</span><span class="nv">interactive</span> <span class="s">&quot;FCSV file: &quot;</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">push-mark</span> <span class="p">(</span><span class="nv">point-min</span><span class="p">)</span> <span class="no">t</span> <span class="no">t</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">goto-char</span> <span class="p">(</span><span class="nb">-</span> <span class="p">(</span><span class="nv">point-max</span><span class="p">)</span> <span class="mi">1</span><span class="p">))</span>
+  <span class="p">(</span><span class="nv">ses-set-curcell</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">ses-write-to-csv-file-region</span> <span class="nv">file</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">ses-write-to-csv-file-region</span> <span class="p">(</span><span class="nv">file</span><span class="p">)</span>
+  <span class="s">&quot;Write the values of the region into a CSV file named FILE.&quot;</span>
+  <span class="p">(</span><span class="nv">interactive</span> <span class="s">&quot;FCSV file: &quot;</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">ses-export-tab</span> <span class="no">nil</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">buf</span> <span class="p">(</span><span class="nv">get-buffer-create</span> <span class="s">&quot;*ses-csv*&quot;</span><span class="p">)))</span>
+    <span class="p">(</span><span class="nv">save-excursion</span>
+      <span class="p">(</span><span class="nv">set-buffer</span> <span class="nv">buf</span><span class="p">)</span>
+      <span class="p">(</span><span class="nv">erase-buffer</span><span class="p">)</span>
+      <span class="p">(</span><span class="nv">yank</span><span class="p">)</span>
+      <span class="p">(</span><span class="nv">call-process-region</span> <span class="p">(</span><span class="nv">point-min</span><span class="p">)</span> <span class="p">(</span><span class="nv">point-max</span><span class="p">)</span> <span class="s">&quot;ruby&quot;</span> <span class="no">t</span> <span class="nv">buf</span> <span class="no">nil</span> <span class="s">&quot;-e&quot;</span> <span class="s">&quot;require &#39;csv&#39;; w = CSV::Writer.create(STDOUT); STDIN.each { |x| w &lt;&lt; x.chomp.split(/\\t/) }&quot;</span><span class="p">)</span>
+      <span class="p">(</span><span class="nv">write-region</span> <span class="p">(</span><span class="nv">point-min</span><span class="p">)</span> <span class="p">(</span><span class="nv">point-max</span><span class="p">)</span> <span class="nv">file</span><span class="p">))))</span>
+</code></pre></div>
+
+<ul>
+<li>By SES, I mean Simple Emacs Spreadsheet. A very popular
+spreadsheet application package for emacs.</li>
+<li>Currently this has not been tested. But, I sure hope it works.</li>
+</ul>
+
+<h2 id="end">END</h2>
+<div class="highlight"><pre><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="c1">;; End of File</span>
+</code></pre></div>
+
+<h2 id="footnotes">Footnotes</h2>
+
+<p><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> I had formally written that one does not need to install both org mode packages, org-regular and org-plus-contrib, but this was proved wrong when I updated a secondary org package. The package required that org-reg was installed although the contrib package had the same libraries.</p>
+
+    
+
+        </div>
+        <div class="dark-box">
+            
+            <div class="lang-selector">
+                
+                <a href="#" data-language-name="shell">Shell</a>
+                
+                <a href="#" data-language-name="emacs-lisp">Emacs-Lisp</a>
+                
+                <a href="#" data-language-name="python">Python</a>
+                
+                <a href="#" data-language-name="javascript">Javascript</a>
+                
+                <a href="#" data-language-name="go">Go</a>
+                
+                <a href="#" data-language-name="ruby">Ruby</a>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+</body>
+</html>
