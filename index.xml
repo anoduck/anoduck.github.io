@@ -379,9 +379,9 @@ is another autocompletion framework)&lt;/li&gt;
 &lt;span class=&#34;c1&#34;&gt;;; orghacks.el. But need to be loaded along with DOTemacs.&lt;/span&gt;
 &lt;span class=&#34;c1&#34;&gt;;;-------------------------------------------------------------------------------&lt;/span&gt;
 &lt;span class=&#34;c1&#34;&gt;;; View Sunset and Sunrise in agenda and Diary&lt;/span&gt;
-&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;setq&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;calendar-latitude&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;33.053090&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;setq&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;calendar-longitude&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;-84.156217&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;setq&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;calendar-location-name&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;quot;Barnesville,Ga&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;setq&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;calendar-latitude&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;12.345678&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;setq&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;calendar-longitude&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;-12.345678&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;setq&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;calendar-location-name&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;quot;Town,State&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 
 &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;autoload&lt;/span&gt; &lt;span class=&#34;ss&#34;&gt;&amp;#39;solar-sunrise-sunset&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;quot;solar.el&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;autoload&lt;/span&gt; &lt;span class=&#34;ss&#34;&gt;&amp;#39;solar-time-string&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;quot;solar.el&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
@@ -1242,7 +1242,7 @@ is another autocompletion framework)&lt;/li&gt;
 &lt;span class=&#34;c1&#34;&gt;;; ;; append to *-init instead of itself&lt;/span&gt;
 &lt;span class=&#34;c1&#34;&gt;;; (setq clean-buffer-list-kill-never-regexps&lt;/span&gt;
 &lt;span class=&#34;c1&#34;&gt;;;       (append &amp;#39;(&amp;quot;^\\*EMMS Playlist\\*.*$&amp;quot;)&lt;/span&gt;
-&lt;span class=&#34;c1&#34;&gt;;; 	      clean-buffer-list-kill-never-regexps-init))&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;;;        clean-buffer-list-kill-never-regexps-init))&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h2 id=&#34;yasnippet-began-to-be-a-bitch-again-again&#34;&gt;Yasnippet began to be a bitch again&amp;amp;again&lt;/h2&gt;
@@ -1649,6 +1649,8 @@ spreadsheet application package for emacs.&lt;/li&gt;
 &lt;h2 id=&#34;footnotes&#34;&gt;Footnotes&lt;/h2&gt;
 
 &lt;p&gt;&lt;sup&gt;&lt;a id=&#34;fn.1&#34; class=&#34;footnum&#34; href=&#34;#fnr.1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; I had formally written that one does not need to install both org mode packages, org-regular and org-plus-contrib, but this was proved wrong when I updated a secondary org package. The package required that org-reg was installed although the contrib package had the same libraries.&lt;/p&gt;
+
+&lt;p&gt;[^1]:&lt;/p&gt;
 </description>
     </item>
     
